@@ -1,5 +1,6 @@
 ﻿namespace DataTableToObject.Tests
 {
+    using DataTableToObject.Exceptions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
     using System.Data;
@@ -52,6 +53,23 @@
             Assert.AreEqual(expected.Text, actual.Text);
             Assert.AreEqual(expected.Date, actual.Date);
             Assert.AreEqual(expected.Id, actual.Id);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(MismatchedTypesException))]
+        public void DifferentTypes()
+        {
+            // Arrange
+            var table = new DataTable();
+            table.Columns.Add("Integer", typeof(int));
+            table.Columns.Add("FloatingPoint", typeof(string)); // <-- not a string!
+            table.Columns.Add("Text", typeof(string));
+            table.Columns.Add("Date", typeof(DateTime));
+            table.Columns.Add("Id", typeof(Guid));
+            table.Rows.Add(23, "I'm not a float :)", "twenty three", new DateTime(1999, 2, 3),
+                new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"));
+
+            // Act
+            var actual = table.ToObject<SomeData>().Single();
         }
 
         [TestMethod]

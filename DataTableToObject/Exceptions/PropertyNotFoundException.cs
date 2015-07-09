@@ -1,9 +1,9 @@
-﻿namespace DataTableToObject
+﻿namespace DataTableToObject.Exceptions
 {
     using System;
 
     /// <summary>
-    /// Exception throw when a column of a DataRow/DataTable doesn't match any in the given class.
+    /// A column of a DataRow/DataTable doesn't match any in the given class.
     /// </summary>
     public class PropertyNotFoundException : Exception
     {
