@@ -17,12 +17,14 @@
         /// <typeparam name="T">The type to parse to</typeparam>
         /// <param name="row">The row to parse</param>
         /// <returns>The parsed object</returns>
+        /// <exception cref="ArgumentNullException">If the given row is null</exception>
         /// <exception cref="PropertyNotFoundException">
         /// If a property in the DataRow is not found on the type
         /// </exception>
         /// <exception cref="MismatchedTypesException">If the found types doesn't match</exception>
         public static T ToObject<T>(this DataRow row) where T : new()
         {
+            if (row == null) throw new ArgumentNullException("row");
             return ToObject<T>(row, false);
         }
 
@@ -33,9 +35,11 @@
         /// <typeparam name="T">The type to parse to</typeparam>
         /// <param name="row">The row to parse</param>
         /// <returns>The parsed object</returns>
+        /// <exception cref="ArgumentNullException">If the given row is null</exception>
         /// <exception cref="MismatchedTypesException">If the found types doesn't match</exception>
         public static T ToObjectSafe<T>(this DataRow row) where T : new()
         {
+            if (row == null) throw new ArgumentNullException("row");
             return ToObject<T>(row, true);
         }
 
@@ -46,12 +50,14 @@
         /// <typeparam name="T">The type to parse to</typeparam>
         /// <param name="table">The table to parse</param>
         /// <returns>The parsed objects</returns>
+        /// <exception cref="ArgumentNullException">If the given table is null</exception>
         /// <exception cref="PropertyNotFoundException">
         /// If a property in the DataTable is not found on the type
         /// </exception>
         /// <exception cref="MismatchedTypesException">If the found types doesn't match</exception>
         public static IEnumerable<T> ToObject<T>(this DataTable table) where T : new()
         {
+            if (table == null) throw new ArgumentNullException("table");
             foreach (DataRow row in table.Rows) yield return ToObject<T>(row, false);
         }
 
@@ -62,9 +68,11 @@
         /// <typeparam name="T">The type to parse to</typeparam>
         /// <param name="table">The table to parse</param>
         /// <returns>The parsed objects</returns>
+        /// <exception cref="ArgumentNullException">If the given table is null</exception>
         /// <exception cref="MismatchedTypesException">If the found types doesn't match</exception>
         public static IEnumerable<T> ToObjectSafe<T>(this DataTable table) where T : new()
         {
+            if (table == null) throw new ArgumentNullException("table");
             foreach (DataRow row in table.Rows) yield return ToObject<T>(row, true);
         }
 

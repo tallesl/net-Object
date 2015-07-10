@@ -108,5 +108,27 @@
             // Act
             table.ToObjectSafe<SomeData>().Single();
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void NullDataRow()
+        {
+            // Arrange
+            DataRow row = null;
+
+            // Act
+            row.ToObject<SomeData>();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void NullDataTable()
+        {
+            // Arrange
+            DataTable table = null;
+
+            // Act
+            table.ToObject<SomeData>();
+        }
     }
 }
