@@ -128,7 +128,7 @@
             DataTable table = null;
 
             // Act
-            table.ToObject<SomeData>();
+            table.ToObject<SomeData>().ToList(); // <-- forcing deferred execution
         }
     }
 }
