@@ -9,9 +9,8 @@
 [nuget]:     http://badge.fury.io/nu/DataTableToObject
 [nuget-img]: https://badge.fury.io/nu/DataTableToObject.png
 
-[Automagically parses (with reflection)][code] a [DataTable][DataTable] to a custom class of yours.
+Automagically parses (with reflection) a [DataTable][DataTable] to a custom class of yours.
 
-[code]:      DataTableToObject/DataTableExtensions.cs#L68-L78
 [DataTable]: https://msdn.microsoft.com/library/system.data.datatable.aspx
 
 ```cs
