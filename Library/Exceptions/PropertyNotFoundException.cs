@@ -7,7 +7,7 @@
     /// </summary>
     public class PropertyNotFoundException : Exception
     {
-        internal PropertyNotFoundException(string className, string propertyName)
-            : base(string.Format("Couldn't find the property \"{0}\" in class \"{1}\".", propertyName, className)) { }
+        internal PropertyNotFoundException(Type classType, string propertyName)
+            : base(string.Format("Couldn't find the property \"{0}\" in class \"{1}\".", propertyName, classType.Name)) { }
     }
 }

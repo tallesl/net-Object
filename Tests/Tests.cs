@@ -14,6 +14,11 @@
 
         public string Text { get; set; }
 
+        public SomeOtherData InnerData { get; set; }
+    }
+
+    public class SomeOtherData
+    {
         public DateTime Date { get; set; }
 
         public Guid Id { get; set; }
@@ -32,17 +37,28 @@
                     Integer = 23,
                     FloatingPoint = 2.3,
                     Text = "twenty three",
-                    Date = new DateTime(1999, 2, 3),
-                    Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e")
+                    InnerData = new SomeOtherData
+                    {
+                        Date = new DateTime(1999, 2, 3),
+                        Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e")
+                    }
                 };
 
             var table = new DataTable();
+
             table.Columns.Add("Integer", typeof(int));
             table.Columns.Add("FloatingPoint", typeof(double));
             table.Columns.Add("Text", typeof(string));
-            table.Columns.Add("Date", typeof(DateTime));
-            table.Columns.Add("Id", typeof(Guid));
-            table.Rows.Add(expected.Integer, expected.FloatingPoint, expected.Text, expected.Date, expected.Id);
+            table.Columns.Add("InnerData.Date", typeof(DateTime));
+            table.Columns.Add("InnerData.Id", typeof(Guid));
+
+            table.Rows.Add(
+                expected.Integer,
+                expected.FloatingPoint,
+                expected.Text,
+                expected.InnerData.Date,
+                expected.InnerData.Id
+            );
 
             // Act
             var actual = table.ToObject<SomeData>().Single();
@@ -51,22 +67,30 @@
             Assert.AreEqual(expected.Integer, actual.Integer);
             Assert.AreEqual(expected.FloatingPoint, actual.FloatingPoint);
             Assert.AreEqual(expected.Text, actual.Text);
-            Assert.AreEqual(expected.Date, actual.Date);
-            Assert.AreEqual(expected.Id, actual.Id);
+            Assert.AreEqual(expected.InnerData.Date, actual.InnerData.Date);
+            Assert.AreEqual(expected.InnerData.Id, actual.InnerData.Id);
         }
+
         [TestMethod]
         [ExpectedException(typeof(MismatchedTypesException))]
         public void DifferentTypes()
         {
             // Arrange
             var table = new DataTable();
+
             table.Columns.Add("Integer", typeof(int));
-            table.Columns.Add("FloatingPoint", typeof(string)); // <-- not a string!
+            table.Columns.Add("FloatingPoint", typeof(string)); // Not a string
             table.Columns.Add("Text", typeof(string));
             table.Columns.Add("Date", typeof(DateTime));
             table.Columns.Add("Id", typeof(Guid));
-            table.Rows.Add(23, "I'm not a float :)", "twenty three", new DateTime(1999, 2, 3),
-                new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"));
+
+            table.Rows.Add(
+                23,
+                "I'm not a float :)",
+                "twenty three",
+                new DateTime(1999, 2, 3),
+                new Guid("366f4bd3-6717-4b14-9c79-70515296df7e")
+            );
 
             // Act
             var actual = table.ToObject<SomeData>().Single();
@@ -78,14 +102,22 @@
         {
             // Arrange
             var table = new DataTable();
-            table.Columns.Add("Byte", typeof(byte));
+
+            table.Columns.Add("Byte", typeof(byte)); // There's no Byte
             table.Columns.Add("Integer", typeof(int));
             table.Columns.Add("FloatingPoint", typeof(double));
             table.Columns.Add("Text", typeof(string));
             table.Columns.Add("Date", typeof(DateTime));
             table.Columns.Add("Id", typeof(Guid));
-            table.Rows.Add((byte)23, 23, 2.3, "twenty three", new DateTime(1999, 2, 3),
-                new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"));
+
+            table.Rows.Add(
+                (byte)23,
+                23,
+                2.3,
+                "twenty three",
+                new DateTime(1999, 2, 3),
+                new Guid("366f4bd3-6717-4b14-9c79-70515296df7e")
+            );
 
             // Act
             table.ToObject<SomeData>().Single();
@@ -96,14 +128,20 @@
         {
             // Arrange
             var table = new DataTable();
-            table.Columns.Add("Byte", typeof(byte));
+
+            table.Columns.Add("Byte", typeof(byte)); // There's no Byte
             table.Columns.Add("Integer", typeof(int));
             table.Columns.Add("FloatingPoint", typeof(double));
             table.Columns.Add("Text", typeof(string));
             table.Columns.Add("Date", typeof(DateTime));
             table.Columns.Add("Id", typeof(Guid));
-            table.Rows.Add((byte)23, 23, 2.3, "twenty three", new DateTime(1999, 2, 3),
-                new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"));
+
+            table.Rows.Add(
+                (byte)23, 23, 2.3,
+                "twenty three",
+                new DateTime(1999, 2, 3),
+                new Guid("366f4bd3-6717-4b14-9c79-70515296df7e")
+            );
 
             // Act
             table.ToObjectSafe<SomeData>().Single();
@@ -128,7 +166,7 @@
             DataTable table = null;
 
             // Act
-            table.ToObject<SomeData>().ToList(); // <-- forcing deferred execution
+            table.ToObject<SomeData>().ToList(); // Forcing deferred execution
         }
     }
 }

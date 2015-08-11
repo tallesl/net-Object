@@ -81,30 +81,45 @@
             var o = new T();
             foreach (DataColumn column in row.Table.Columns)
             {
-                var columnType = column.DataType;
-                var columnName = column.ColumnName;
-                var columnValue = row[column];
+                // Iteration values
+                var currentType = o.GetType();
+                object previousValue = null;
+                object currentValue = o;
 
-                var classType = o.GetType();
-                var className = classType.Name;
-
-                var property = classType.GetProperty(columnName);
-
-                // class property name != DataTable column name
-                if (property == null)
+                // Iterating "foo" then "bar" then "qux" on "foo.bar.qux"
+                foreach (var propertyName in column.ColumnName.Split(new[] { '.' }))
                 {
-                    // if it's not safe we throw
-                    if (!safe) throw new PropertyNotFoundException(className, columnName);
-                }
-                else
-                {
-                    var propertyType = property.PropertyType;
+                    // Getting the current property
+                    var currentProperty = currentType.GetProperty(propertyName);
 
-                    // class property type != DataTable column type
-                    if (columnType != propertyType) throw new MismatchedTypesException(propertyType, columnType);
+                    // Checking if the property exists
+                    if (currentProperty == null)
+                    {
+                        if (safe) break;
+                        else throw new PropertyNotFoundException(o.GetType(), column.ColumnName);
+                    }
 
-                    // Both names and types have matched, good to go
-                    if (row[column] != DBNull.Value) property.SetValue(o, columnValue, null);
+                    // Getting the current type
+                    currentType = currentProperty.PropertyType;
+
+                    // Finding out if it's a custom class that we can instantiate it
+                    var instantiatedByUs = currentType.GetConstructor(Type.EmptyTypes) != null;
+
+                    // Storing previous value
+                    previousValue = currentValue;
+
+                    // Getting the current value
+                    currentValue = currentProperty.GetValue(previousValue, null);
+                    if (instantiatedByUs && currentValue == null) currentValue = Activator.CreateInstance(currentType);
+
+                    // Checking if the types match
+                    if (!instantiatedByUs && currentType != column.DataType)
+                        throw new MismatchedTypesException(currentType, column.DataType);
+
+                    // Setting the current value on the current property
+                    var valueToSet = instantiatedByUs ? currentValue :
+                        (row[column] == DBNull.Value ? null : row[column]);
+                    currentProperty.SetValue(previousValue, valueToSet, null);
                 }
             }
             return o;

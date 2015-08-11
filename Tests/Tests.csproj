@@ -56,9 +56,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataTableToObject\DataTableToObject.csproj">
+    <ProjectReference Include="..\Library\Library.csproj">
       <Project>{ea49f322-4871-4ae2-a6b0-9dbe00c6f4b6}</Project>
-      <Name>DataTableToObject</Name>
+      <Name>Library</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
