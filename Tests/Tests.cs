@@ -8,20 +8,13 @@
 
     public class SomeData
     {
-        public int Integer { get; set; }
+        public Guid Id { get; set; }
 
-        public double FloatingPoint { get; set; }
+        public DateTime? Date { get; set; }
 
         public string Text { get; set; }
 
-        public SomeOtherData InnerData { get; set; }
-    }
-
-    public class SomeOtherData
-    {
-        public DateTime? Date { get; set; }
-
-        public Guid? Id { get; set; }
+        public SomeData Nested { get; set; }
     }
 
     [TestClass]
@@ -30,45 +23,100 @@
         [TestMethod]
         public void TypicalUsage()
         {
-            // Arrange
             var expected =
                 new SomeData
                 {
-                    Integer = 23,
-                    FloatingPoint = 2.3,
-                    Text = "twenty three",
-                    InnerData = new SomeOtherData
-                    {
-                        Date = new DateTime(1999, 2, 3),
-                        Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e")
-                    }
+                    Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
+                    Date = new DateTime(1999, 1, 1),
+                    Text = "eleven",
+                    Nested =
+                        new SomeData
+                        {
+                            Id = new Guid("e591be31-289f-4a99-ba67-288ea24b7d7e"),
+                            Date = new DateTime(1999, 2, 2),
+                            Text = "twenty two",
+                            Nested =
+                                new SomeData
+                                {
+                                    Id = new Guid("3bfdd62f-8b31-4aa2-931d-46535f291b0e"),
+                                    Date = new DateTime(1999, 3, 3),
+                                    Text = "thirthy three",
+                                    Nested = null,
+                                },
+                        },
                 };
 
             var table = new DataTable();
 
-            table.Columns.Add("Integer", typeof(int));
-            table.Columns.Add("FloatingPoint", typeof(double));
+            // 1st level
+            table.Columns.Add("Id", typeof(Guid));
+            table.Columns.Add("Date", typeof(DateTime));
             table.Columns.Add("Text", typeof(string));
-            table.Columns.Add("InnerData.Date", typeof(DateTime));
-            table.Columns.Add("InnerData.Id", typeof(Guid));
+
+            // 2nd level
+            table.Columns.Add("Nested.Id", typeof(Guid));
+            table.Columns.Add("Nested.Date", typeof(DateTime));
+            table.Columns.Add("Nested.Text", typeof(string));
+
+            // 3rd level
+            table.Columns.Add("Nested.Nested.Id", typeof(Guid));
+            table.Columns.Add("Nested.Nested.Date", typeof(DateTime));
+            table.Columns.Add("Nested.Nested.Text", typeof(string));
+
+            // 4th level
+            table.Columns.Add("Nested.Nested.Nested.Id", typeof(Guid));
+            table.Columns.Add("Nested.Nested.Nested.Date", typeof(DateTime));
+            table.Columns.Add("Nested.Nested.Nested.Text", typeof(string));
+
+            // 5th level
+            table.Columns.Add("Nested.Nested.Nested.Nested.Id", typeof(Guid));
+            table.Columns.Add("Nested.Nested.Nested.Nested.Date", typeof(DateTime));
+            table.Columns.Add("Nested.Nested.Nested.Nested.Text", typeof(string));
 
             table.Rows.Add(
-                expected.Integer,
-                expected.FloatingPoint,
+
+                // 1st level
+                expected.Id,
+                expected.Date,
                 expected.Text,
-                expected.InnerData.Date,
-                expected.InnerData.Id
+
+                // 2nd level
+                expected.Nested.Id,
+                expected.Nested.Date,
+                expected.Nested.Text,
+
+                // 3rd level
+                expected.Nested.Nested.Id,
+                expected.Nested.Nested.Date,
+                expected.Nested.Nested.Text,
+
+                // 4th level
+                DBNull.Value,
+                DBNull.Value,
+                DBNull.Value,
+
+                // 5th level
+                DBNull.Value,
+                DBNull.Value,
+                DBNull.Value
             );
 
-            // Act
             var actual = table.ToObject<SomeData>().Single();
 
-            // Assert
-            Assert.AreEqual(expected.Integer, actual.Integer);
-            Assert.AreEqual(expected.FloatingPoint, actual.FloatingPoint);
+            // 1st level
+            Assert.AreEqual(expected.Id, actual.Id);
+            Assert.AreEqual(expected.Date, actual.Date);
             Assert.AreEqual(expected.Text, actual.Text);
-            Assert.AreEqual(expected.InnerData.Date, actual.InnerData.Date);
-            Assert.AreEqual(expected.InnerData.Id, actual.InnerData.Id);
+
+            // 2nd level
+            Assert.AreEqual(expected.Nested.Id, actual.Nested.Id);
+            Assert.AreEqual(expected.Nested.Date, actual.Nested.Date);
+            Assert.AreEqual(expected.Nested.Text, actual.Nested.Text);
+
+            // 3rd level
+            Assert.AreEqual(expected.Nested.Nested.Id, actual.Nested.Nested.Id);
+            Assert.AreEqual(expected.Nested.Nested.Date, actual.Nested.Nested.Date);
+            Assert.AreEqual(expected.Nested.Nested.Text, actual.Nested.Nested.Text);
         }
 
         [TestMethod]
@@ -78,22 +126,18 @@
             // Arrange
             var table = new DataTable();
 
-            table.Columns.Add("Integer", typeof(int));
-            table.Columns.Add("FloatingPoint", typeof(string)); // Not a string
-            table.Columns.Add("Text", typeof(string));
+            table.Columns.Add("Id", typeof(int)); // Should be a Guid
             table.Columns.Add("Date", typeof(DateTime));
-            table.Columns.Add("Id", typeof(Guid));
+            table.Columns.Add("Text", typeof(string));
 
             table.Rows.Add(
-                23,
-                "I'm not a float :)",
-                "twenty three",
-                new DateTime(1999, 2, 3),
-                new Guid("366f4bd3-6717-4b14-9c79-70515296df7e")
+                11,
+                new DateTime(1999, 1, 1),
+                "eleven"
             );
 
             // Act
-            var actual = table.ToObject<SomeData>().Single();
+            table.ToObject<SomeData>().Single();
         }
 
         [TestMethod]
@@ -103,20 +147,16 @@
             // Arrange
             var table = new DataTable();
 
-            table.Columns.Add("Byte", typeof(byte)); // There's no Byte
-            table.Columns.Add("Integer", typeof(int));
-            table.Columns.Add("FloatingPoint", typeof(double));
-            table.Columns.Add("Text", typeof(string));
-            table.Columns.Add("Date", typeof(DateTime));
             table.Columns.Add("Id", typeof(Guid));
+            table.Columns.Add("Date", typeof(DateTime));
+            table.Columns.Add("Text", typeof(string));
+            table.Columns.Add("Integer", typeof(int)); // There's no Integer
 
             table.Rows.Add(
-                (byte)23,
-                23,
-                2.3,
-                "twenty three",
-                new DateTime(1999, 2, 3),
-                new Guid("366f4bd3-6717-4b14-9c79-70515296df7e")
+                new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
+                new DateTime(1999, 1, 1),
+                "eleven",
+                11
             );
 
             // Act
@@ -129,18 +169,16 @@
             // Arrange
             var table = new DataTable();
 
-            table.Columns.Add("Byte", typeof(byte)); // There's no Byte
-            table.Columns.Add("Integer", typeof(int));
-            table.Columns.Add("FloatingPoint", typeof(double));
-            table.Columns.Add("Text", typeof(string));
-            table.Columns.Add("Date", typeof(DateTime));
             table.Columns.Add("Id", typeof(Guid));
+            table.Columns.Add("Date", typeof(DateTime));
+            table.Columns.Add("Text", typeof(string));
+            table.Columns.Add("Integer", typeof(int)); // There's no Integer
 
             table.Rows.Add(
-                (byte)23, 23, 2.3,
-                "twenty three",
-                new DateTime(1999, 2, 3),
-                new Guid("366f4bd3-6717-4b14-9c79-70515296df7e")
+                new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
+                new DateTime(1999, 1, 1),
+                "eleven",
+                11
             );
 
             // Act
