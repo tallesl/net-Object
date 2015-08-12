@@ -19,9 +19,9 @@
 
     public class SomeOtherData
     {
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
     }
 
     [TestClass]

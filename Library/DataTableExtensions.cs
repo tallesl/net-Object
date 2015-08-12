@@ -100,7 +100,7 @@
                     }
 
                     // Getting the current type
-                    currentType = currentProperty.PropertyType;
+                    currentType = Nullable.GetUnderlyingType(currentProperty.PropertyType) ?? currentProperty.PropertyType;
 
                     // Finding out if it's a custom class that we can instantiate it
                     var instantiatedByUs = currentType.GetConstructor(Type.EmptyTypes) != null;
