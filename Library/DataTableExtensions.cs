@@ -114,7 +114,7 @@
 
                     // Checking if the types match
                     if (!instantiatedByUs && currentType != column.DataType)
-                        throw new MismatchedTypesException(currentType, column.DataType);
+                        throw new MismatchedTypesException(currentProperty, column.DataType);
 
                     // Setting the current value on the current property
                     var valueToSet = instantiatedByUs ? currentValue :
