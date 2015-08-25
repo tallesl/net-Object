@@ -8,7 +8,7 @@
     /// <summary>
     /// Extension methods for parsing DataRow/DataTable to a custom class.
     /// </summary>
-    public static class DataTableExtensions
+    public static partial class DataTableExtensions
     {
         /// <summary>
         /// Parses the DataRow to the given type.
@@ -24,7 +24,6 @@
         /// <exception cref="MismatchedTypesException">If the found types doesn't match</exception>
         public static T ToObject<T>(this DataRow row) where T : new()
         {
-            if (row == null) throw new ArgumentNullException("row");
             return ToObject<T>(row, false);
         }
 
@@ -39,7 +38,6 @@
         /// <exception cref="MismatchedTypesException">If the found types doesn't match</exception>
         public static T ToObjectSafe<T>(this DataRow row) where T : new()
         {
-            if (row == null) throw new ArgumentNullException("row");
             return ToObject<T>(row, true);
         }
 
@@ -57,8 +55,7 @@
         /// <exception cref="MismatchedTypesException">If the found types doesn't match</exception>
         public static IEnumerable<T> ToObject<T>(this DataTable table) where T : new()
         {
-            if (table == null) throw new ArgumentNullException("table");
-            foreach (DataRow row in table.Rows) yield return ToObject<T>(row, false);
+            return ToObject<T>(table, false);
         }
 
         /// <summary>
@@ -72,57 +69,7 @@
         /// <exception cref="MismatchedTypesException">If the found types doesn't match</exception>
         public static IEnumerable<T> ToObjectSafe<T>(this DataTable table) where T : new()
         {
-            if (table == null) throw new ArgumentNullException("table");
-            foreach (DataRow row in table.Rows) yield return ToObject<T>(row, true);
-        }
-
-        private static T ToObject<T>(DataRow row, bool safe) where T : new()
-        {
-            var o = new T();
-            foreach (DataColumn column in row.Table.Columns)
-            {
-                // Iteration values
-                var currentType = o.GetType();
-                object previousValue = null;
-                object currentValue = o;
-
-                // Iterating "foo" then "bar" then "qux" on "foo.bar.qux"
-                foreach (var propertyName in column.ColumnName.Split(new[] { '.' }))
-                {
-                    // Getting the current property
-                    var currentProperty = currentType.GetProperty(propertyName);
-
-                    // Checking if the property exists
-                    if (currentProperty == null)
-                    {
-                        if (safe) break;
-                        else throw new PropertyNotFoundException(o.GetType(), column.ColumnName);
-                    }
-
-                    // Getting the current type
-                    currentType = Nullable.GetUnderlyingType(currentProperty.PropertyType) ?? currentProperty.PropertyType;
-
-                    // Finding out if it's a custom class that we can instantiate it
-                    var instantiatedByUs = currentType.GetConstructor(Type.EmptyTypes) != null;
-
-                    // Storing previous value
-                    previousValue = currentValue;
-
-                    // Getting the current value
-                    currentValue = currentProperty.GetValue(previousValue, null);
-                    if (instantiatedByUs && currentValue == null) currentValue = Activator.CreateInstance(currentType);
-
-                    // Checking if the types match
-                    if (!instantiatedByUs && currentType != column.DataType)
-                        throw new MismatchedTypesException(currentProperty, column.DataType);
-
-                    // Setting the current value on the current property
-                    var valueToSet = instantiatedByUs ? currentValue :
-                        (row[column] == DBNull.Value ? null : row[column]);
-                    currentProperty.SetValue(previousValue, valueToSet, null);
-                }
-            }
-            return o;
+            return ToObject<T>(table, true);
         }
     }
 }
