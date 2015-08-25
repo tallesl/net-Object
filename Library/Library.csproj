@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\Private.cs" />
+    <Compile Include="Exceptions\DataTableToObjectException.cs" />
     <Compile Include="Exceptions\MismatchedTypesException.cs" />
     <Compile Include="Api\Public.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

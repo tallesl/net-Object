@@ -6,7 +6,7 @@
     /// <summary>
     /// The corresponding type in the specified class is different than the one found in the DataTable.
     /// </summary>
-    public class MismatchedTypesException : Exception
+    public class MismatchedTypesException : DataTableToObjectException
     {
         internal MismatchedTypesException(PropertyInfo property, Type column) : base(
             string.Format(
