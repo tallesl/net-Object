@@ -53,7 +53,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DictionaryToObject.cs" />
+    <Compile Include="StringDictionaryToObject.cs" />
+    <Compile Include="ObjectDictionaryToObject.cs" />
     <Compile Include="SomeData.cs" />
     <Compile Include="DataTableToObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

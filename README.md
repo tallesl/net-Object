@@ -16,8 +16,20 @@ Automagically parses (with reflection) a Dictionary/DataRow/DataTable to a custo
 ```cs
 using ToObject;
 
-var user = new Dictionary<string, object> { { "Name", "John Smith" }, { "Birth", new DateTime(1970, 1, 1) } };
-var actualUser = user.ToObject<User>();
+var userData = new Dictionary<string, object> { { "Name", "John Smith" }, { "Birth", new DateTime(1970, 1, 1) } };
+var userObject = userData.ToObject<User>();
+```
+
+## IDictionary<string, string>
+
+```cs
+using ToObject;
+
+var userData = new Dictionary<string, string> { { "Name", "John Smith" }, { "Birth", "1970-01-01" } };
+var userObject = userData.ToObject<User>();
+
+userData["Birth"] = "Not a date!";
+var shitHappens = userData.ToObject<User>(); // throws CouldntParseException
 ```
 
 ## DataRow/DataTable

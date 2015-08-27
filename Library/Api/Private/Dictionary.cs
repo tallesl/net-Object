@@ -3,24 +3,29 @@
     using NameTrees;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Reflection;
     using ToObject.Exceptions;
 
     public static partial class ToObjectExtensions
     {
-        private static T ToObject<T>(IDictionary<string, object> dict, bool safe)
+        private static T ToObject<T>(IDictionary<string, object> dict, bool safe, bool parse)
         {
             if (dict == null)
                 throw new ArgumentNullException("dict");
 
             var tree = new NameTree(dict.Keys);
 
-            return (T)ToObject(typeof(T), dict, safe, tree.Root.Children);
+            return (T)ToObject(typeof(T), dict, tree.Root.Children, safe, parse);
         }
 
-        private static object ToObject(Type t, IDictionary<string, object> dict, bool safe, IEnumerable<NameNode> children)
+        private static object ToObject(
+            Type t, IDictionary<string, object> dict, IEnumerable<NameNode> children, bool safe, bool parse)
         {
+            // If there's no child with value we don't instantiate
+            if (!AnyChildWithValue(dict, children)) return null;
+
             // Getting an instance of the object being created
             var beingCreated = Convert.ChangeType(Activator.CreateInstance(t, false), t);
 
@@ -47,20 +52,11 @@
                         // If it's an end node (child without children)
                         child.EndNode ?
 
-                        // We just use the value in the dictionary
-                        dict[child.Fullname] :
+                        // We use the value in the dictionary and convert it if needed
+                        (parse ? Parse((string)dict[child.Fullname], property.PropertyType) : dict[child.Fullname]) :
 
-                        // Else
-                        (
-                            // If any of its children has value
-                            AnyChildWithValue(dict, child.Children) ?
-
-                            // We call this very method again on it (recursion)
-                            ToObject(property.PropertyType, dict, safe, child.Children) :
-
-                            // Else we just use null
-                            null
-                        );
+                        // Else we call this very method again on it (recursion)
+                        ToObject(property.PropertyType, dict, child.Children, safe, parse);
 
                     // If types on the dictionary and the class doesn't match
                     if (value != null && value.GetType() != GetUnderlyingType(property))
@@ -77,7 +73,32 @@
             return beingCreated;
         }
 
-        // The property type, if it's nullable we get its underlying type
+        // Returns if the given type accepts null
+        private static bool AcceptsNull(Type t)
+        {
+            return !t.IsValueType || Nullable.GetUnderlyingType(t) != null;
+        }
+
+        // Attempts to parse the given string to the give type
+        private static object Parse(string value, Type t)
+        {
+            if (t == typeof(string)) return value;
+            else if (value == null && !AcceptsNull(t)) throw new CouldntParseException(value, t);
+            else
+            {
+                var converter = TypeDescriptor.GetConverter(t);
+                try
+                {
+                    return converter.ConvertFromString(value);
+                }
+                catch
+                {
+                    throw new CouldntParseException(value, t);
+                }
+            }
+        }
+
+        // Returns the property type, if it's nullable we get its underlying type
         private static Type GetUnderlyingType(PropertyInfo property)
         {
             return Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;

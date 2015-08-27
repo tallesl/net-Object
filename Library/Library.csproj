@@ -44,6 +44,7 @@
     <Compile Include="Api\Private\DataTable.cs" />
     <Compile Include="Api\Private\Dictionary.cs" />
     <Compile Include="Api\Public\Dictionary.cs" />
+    <Compile Include="Exceptions\CouldntParseException.cs" />
     <Compile Include="Exceptions\ToObjectException.cs" />
     <Compile Include="Exceptions\MismatchedTypesException.cs" />
     <Compile Include="Api\Public\DataTable.cs" />

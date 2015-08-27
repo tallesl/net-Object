@@ -27,7 +27,7 @@
             var tree = new NameTree(names);
 
             foreach (DataRow row in table.Rows)
-                yield return (T)ToObject(typeof(T), ToDictionary(row), safe, tree.Root.Children);
+                yield return (T)ToObject(typeof(T), ToDictionary(row), tree.Root.Children, safe, false);
         }
 
         private static IDictionary<string, object> ToDictionary(DataRow row)

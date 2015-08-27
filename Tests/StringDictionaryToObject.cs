@@ -6,7 +6,7 @@
     using ToObject.Exceptions;
 
     [TestClass]
-    public class DictionaryToObject
+    public class StringDictionaryToObject
     {
         [TestMethod]
         public void LengthyTest()
@@ -42,26 +42,26 @@
                 };
 
             var dict =
-                new Dictionary<string, object>()
+                new Dictionary<string, string>()
                 {
                     // 1st level
-                    { "Id", expected.Id },
-                    { "Date", expected.Date },
+                    { "Id", expected.Id.ToString() },
+                    { "Date", expected.Date.ToString() },
                     { "Text", expected.Text },
 
                     // 2nd level
-                    { "Nested.Id", expected.Nested.Id },
-                    { "Nested.Date", expected.Nested.Date },
+                    { "Nested.Id", expected.Nested.Id.ToString() },
+                    { "Nested.Date", expected.Nested.Date.ToString() },
                     { "Nested.Text", expected.Nested.Text },
 
                     // 3rd level
-                    { "Nested.Nested.Id", expected.Nested.Nested.Id },
-                    { "Nested.Nested.Date", expected.Nested.Nested.Date },
+                    { "Nested.Nested.Id", expected.Nested.Nested.Id.ToString() },
+                    { "Nested.Nested.Date", expected.Nested.Nested.Date.ToString() },
                     { "Nested.Nested.Text", expected.Nested.Nested.Text },
 
                     // 4th level
-                    { "Nested.Nested.Nested.Id", expected.Nested.Nested.Nested.Id },
-                    { "Nested.Nested.Nested.Date", expected.Nested.Nested.Nested.Date },
+                    { "Nested.Nested.Nested.Id", expected.Nested.Nested.Nested.Id.ToString() },
+                    { "Nested.Nested.Nested.Date", expected.Nested.Nested.Nested.Date.ToString() },
                     { "Nested.Nested.Nested.Text", expected.Nested.Nested.Nested.Text },
 
                     // 5th level
@@ -97,15 +97,15 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MismatchedTypesException))]
+        [ExpectedException(typeof(CouldntParseException))]
         public void DifferentTypes()
         {
             // Arrange
             var dict =
-                new Dictionary<string, object>()
+                new Dictionary<string, string>()
                 {
-                    { "Id", 11 }, // Should be a Guid
-                    { "Date", new DateTime(1999, 1, 1) },
+                    { "Id", "11" }, // Should be a Guid
+                    { "Date", "1999-01-01" },
                     { "Text", "eleven" },
                 };
 
@@ -119,12 +119,12 @@
         {
             // Arrange
             var dict =
-                new Dictionary<string, object>()
+                new Dictionary<string, string>()
                 {
-                    { "Id", new Guid("366f4bd3-6717-4b14-9c79-70515296df7e") },
-                    { "Date", new DateTime(1999, 1, 1) },
+                    { "Id", "366f4bd3-6717-4b14-9c79-70515296df7e" },
+                    { "Date", "1999-01-01" },
                     { "Text", "eleven" },
-                    { "Integer", 11 }, // There's no Integer
+                    { "Integer", "11" }, // There's no Integer
                 };
 
             // Act
@@ -136,12 +136,12 @@
         {
             // Arrange
             var dict =
-                new Dictionary<string, object>()
+                new Dictionary<string, string>()
                 {
-                    { "Id", new Guid("366f4bd3-6717-4b14-9c79-70515296df7e") },
-                    { "Date", new DateTime(1999, 1, 1) },
+                    { "Id", "366f4bd3-6717-4b14-9c79-70515296df7e" },
+                    { "Date", "1999-01-01" },
                     { "Text", "eleven" },
-                    { "Integer", 11 }, // There's no Integer
+                    { "Integer", "11" }, // There's no Integer
                 };
 
             // Act
@@ -153,7 +153,7 @@
         public void Null()
         {
             // Arrange
-            IDictionary<string, object> dict = null;
+            IDictionary<string, string> dict = null;
 
             // Act
             dict.ToObject<SomeData>();

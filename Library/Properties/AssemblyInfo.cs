@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ToObject")]
-[assembly: AssemblyDescription("Automagically parses (with reflection) a Dictionary/DataTable to custom class of yours.")]
+[assembly: AssemblyDescription("Automagically parses (with reflection) a Dictionary/DataRow/DataTable to custom class of yours.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("")]
