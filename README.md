@@ -1,4 +1,4 @@
-# DataTable to Object
+# ToObject
 
 [![][build-img]][build]
 [![][nuget-img]][nuget]
@@ -9,13 +9,21 @@
 [nuget]:     http://badge.fury.io/nu/DataTableToObject
 [nuget-img]: https://badge.fury.io/nu/DataTableToObject.png
 
-Automagically parses (with reflection) a [DataTable][DataTable] to a custom class of yours.
+Automagically parses (with reflection) a Dictionary/DataRow/DataTable to a custom class of yours.
 
-[DataTable]: https://msdn.microsoft.com/library/system.data.datatable.aspx
+## IDictionary<string, object>
 
 ```cs
-using DataTableToObject;
+using ToObject;
 
-var users = dataTable.ToObject<User>(); // parses each row as an User and returns an IEnumerable<User>
-                                        // the column names on the DataTable must match the property names on the class
+var user = new Dictionary<string, object> { { "Name", "John Smith" }, { "Birth", new DateTime(1970, 1, 1) } };
+var actualUser = user.ToObject<User>();
+```
+
+## DataRow/DataTable
+
+```cs
+using ToObject;
+
+var users = dataTable.ToObject<User>();
 ```

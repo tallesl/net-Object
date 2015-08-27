@@ -1,11 +1,11 @@
-﻿namespace DataTableToObject.Exceptions
+﻿namespace ToObject.Exceptions
 {
     using System;
 
     /// <summary>
-    /// A column of a DataRow/DataTable doesn't match any in the given class.
+    /// Couldn't find a property in class.
     /// </summary>
-    public class PropertyNotFoundException : DataTableToObjectException
+    public class PropertyNotFoundException : ToObjectException
     {
         internal PropertyNotFoundException(Type classType, string propertyName)
             : base(string.Format("Couldn't find the property \"{0}\" in class \"{1}\".", propertyName, classType.Name)) { }

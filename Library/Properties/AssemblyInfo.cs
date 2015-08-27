@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DataTableToObject")]
-[assembly: AssemblyDescription("Automagically parses (with reflection) a DataTable to custom class of yours.")]
+[assembly: AssemblyTitle("ToObject")]
+[assembly: AssemblyDescription("Automagically parses (with reflection) a Dictionary/DataTable to custom class of yours.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("")]

@@ -1,24 +1,13 @@
-﻿namespace DataTableToObject.Tests
+﻿namespace ToObject.Tests
 {
-    using DataTableToObject.Exceptions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
     using System.Data;
     using System.Linq;
-
-    public class SomeData
-    {
-        public Guid? Id { get; set; }
-
-        public DateTime? Date { get; set; }
-
-        public string Text { get; set; }
-
-        public SomeData Nested { get; set; }
-    }
+    using ToObject.Exceptions;
 
     [TestClass]
-    public class Tests
+    public class DataTableToObject
     {
         [TestMethod]
         public void LengthyTest()
@@ -47,7 +36,7 @@
                                             Id = new Guid("3bfdd62f-8b31-4aa2-931d-46535f291b0e"),
                                             Date = new DateTime(1999, 4, 4),
                                             Text = "level 4",
-                                            Nested = null
+                                            Nested = null,
                                         },
                                 },
                         },

@@ -1,14 +1,14 @@
-﻿namespace DataTableToObject
+﻿namespace ToObject
 {
-    using DataTableToObject.Exceptions;
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using ToObject.Exceptions;
 
     /// <summary>
-    /// Extension methods for parsing DataRow/DataTable to a custom class.
+    /// Extension methods for parsing a Dictionary/DataRow/DataTable to a custom class.
     /// </summary>
-    public static partial class DataTableExtensions
+    public static partial class ToObjectExtensions
     {
         /// <summary>
         /// Parses the DataRow to the given type.
