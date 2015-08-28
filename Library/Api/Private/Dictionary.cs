@@ -29,11 +29,14 @@
             // Getting an instance of the object being created
             var beingCreated = Convert.ChangeType(Activator.CreateInstance(t, false), t);
 
+            // Names of the properties in the class that has been assigned
+            var assigned = new HashSet<string>();
+
             // Iterating its children
             foreach (var child in children ?? Enumerable.Empty<NameNode>())
             {
                 // Getting the PropertyInfo of the type that matches the child's name (reflection)
-                var property = beingCreated.GetType().GetProperty(child.Name);
+                var property = t.GetProperty(child.Name);
 
                 // If there's no such property in the class
                 if (property == null)
@@ -42,7 +45,7 @@
                     if (!safe)
 
                         // We throw
-                        throw new PropertyNotFoundException(beingCreated.GetType(), child.Name);
+                        throw new PropertyNotFoundException(t, child.Name);
                 }
                 else
                 {
@@ -66,7 +69,23 @@
                     
                     // Setting the property value (reflection)
                     property.SetValue(beingCreated, value, null);
+
+                    // Adding to our assigned collection (we'll check those later)
+                    assigned.Add(property.Name);
                 }
+            }
+
+            // If it's not safe
+            if (!safe)
+            {
+                // Getting the properties that hasn't been assigned
+                var notAssigned = t.GetProperties().Select(p => p.Name).Except(assigned);
+
+                // If there's any
+                if (notAssigned.Any())
+
+                    // We throw
+                    throw new ValueNotFoundException(t, notAssigned.First());
             }
 
             // Here, take it :)

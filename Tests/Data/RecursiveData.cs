@@ -1,8 +1,8 @@
-﻿namespace ToObject.Tests
+﻿namespace ToObject.Tests.Data
 {
     using System;
 
-    public class SomeData
+    public class RecursiveData
     {
         public Guid? Id { get; set; }
 
@@ -10,6 +10,6 @@
 
         public string Text { get; set; }
 
-        public SomeData Nested { get; set; }
+        public RecursiveData Nested { get; set; }
     }
 }

@@ -5,6 +5,7 @@
     using System.Data;
     using System.Linq;
     using ToObject.Exceptions;
+    using ToObject.Tests.Data;
 
     [TestClass]
     public class DataTableToObject
@@ -13,25 +14,25 @@
         public void LengthyTest()
         {
             var expected =
-                new SomeData
+                new RecursiveData
                 {
                     Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
                     Date = new DateTime(1999, 1, 1),
                     Text = "level 1",
                     Nested =
-                        new SomeData
+                        new RecursiveData
                         {
                             Id = new Guid("e591be31-289f-4a99-ba67-288ea24b7d7e"),
                             Date = new DateTime(1999, 2, 2),
                             Text = "level 2",
                             Nested =
-                                new SomeData
+                                new RecursiveData
                                 {
                                     Id = null,
                                     Date = null,
                                     Text = null,
                                     Nested =
-                                        new SomeData
+                                        new RecursiveData
                                         {
                                             Id = new Guid("3bfdd62f-8b31-4aa2-931d-46535f291b0e"),
                                             Date = new DateTime(1999, 4, 4),
@@ -97,7 +98,7 @@
                 DBNull.Value
             );
 
-            var actual = table.ToObject<SomeData>().Single();
+            var actual = table.ToObject<RecursiveData>().Single();
 
             // 1st level
             Assert.AreEqual(expected.Id, actual.Id);
@@ -141,7 +142,7 @@
             );
 
             // Act
-            table.ToObject<SomeData>().Single();
+            table.ToObject<RecursiveData>().Single();
         }
 
         [TestMethod]
@@ -164,7 +165,7 @@
             );
 
             // Act
-            table.ToObject<SomeData>().Single();
+            table.ToObject<RecursiveData>().Single();
         }
 
         [TestMethod]
@@ -186,7 +187,7 @@
             );
 
             // Act
-            table.ToObjectSafe<SomeData>().Single();
+            table.ToObjectSafe<RecursiveData>().Single();
         }
 
         [TestMethod]
@@ -197,7 +198,7 @@
             DataRow row = null;
 
             // Act
-            row.ToObject<SomeData>();
+            row.ToObject<RecursiveData>();
         }
 
         [TestMethod]
@@ -208,7 +209,7 @@
             DataTable table = null;
 
             // Act
-            table.ToObject<SomeData>().ToList(); // Forcing deferred execution
+            table.ToObject<RecursiveData>().ToList(); // Forcing deferred execution
         }
     }
 }

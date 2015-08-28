@@ -4,6 +4,7 @@
     using System;
     using System.Collections.Generic;
     using ToObject.Exceptions;
+    using ToObject.Tests.Data;
 
     [TestClass]
     public class StringDictionaryToObject
@@ -12,25 +13,25 @@
         public void LengthyTest()
         {
             var expected =
-                new SomeData
+                new RecursiveData
                 {
                     Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
                     Date = new DateTime(1999, 1, 1),
                     Text = "level 1",
                     Nested =
-                        new SomeData
+                        new RecursiveData
                         {
                             Id = new Guid("e591be31-289f-4a99-ba67-288ea24b7d7e"),
                             Date = new DateTime(1999, 2, 2),
                             Text = "level 2",
                             Nested =
-                                new SomeData
+                                new RecursiveData
                                 {
                                     Id = null,
                                     Date = null,
                                     Text = null,
                                     Nested =
-                                        new SomeData
+                                        new RecursiveData
                                         {
                                             Id = new Guid("3bfdd62f-8b31-4aa2-931d-46535f291b0e"),
                                             Date = new DateTime(1999, 4, 4),
@@ -70,7 +71,7 @@
                     { "Nested.Nested.Nested.Nested.Text", null },
                 };
             
-            var actual = dict.ToObject<SomeData>();
+            var actual = dict.ToObject<RecursiveData>();
 
             // 1st level
             Assert.AreEqual(expected.Id, actual.Id);
@@ -110,7 +111,7 @@
                 };
 
             // Act
-            dict.ToObject<SomeData>();
+            dict.ToObject<RecursiveData>();
         }
 
         [TestMethod]
@@ -128,7 +129,7 @@
                 };
 
             // Act
-            dict.ToObject<SomeData>();
+            dict.ToObject<RecursiveData>();
         }
 
         [TestMethod]
@@ -145,7 +146,7 @@
                 };
 
             // Act
-            dict.ToObjectSafe<SomeData>();
+            dict.ToObjectSafe<RecursiveData>();
         }
 
         [TestMethod]
@@ -156,7 +157,7 @@
             IDictionary<string, string> dict = null;
 
             // Act
-            dict.ToObject<SomeData>();
+            dict.ToObject<RecursiveData>();
         }
     }
 }
