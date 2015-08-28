@@ -9,7 +9,7 @@
 [nuget]:     http://badge.fury.io/nu/DataTableToObject
 [nuget-img]: https://badge.fury.io/nu/DataTableToObject.png
 
-Automagically parses (with reflection) a Dictionary/DataRow/DataTable to a custom class of yours.
+Automagically parses (with reflection) an AppSettings/Dictionary/DataRow/DataTable to a custom class of yours.
 
 ## IDictionary<string, object>
 
@@ -38,4 +38,12 @@ var shitHappens = userData.ToObject<User>(); // throws CouldntParseException
 using ToObject;
 
 var users = dataTable.ToObject<User>();
+```
+
+## NameValueCollection (&lt;appSettings&gt;)
+
+```cs
+using ToObject;
+
+var configuration = ConfigurationManager.AppSettings.ToObject<SomeConfigurationClass>();
 ```

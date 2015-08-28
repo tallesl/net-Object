@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.XML" />
   </ItemGroup>
@@ -53,6 +54,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AppSettingsToObject.cs" />
     <Compile Include="StringDictionaryToObject.cs" />
     <Compile Include="ObjectDictionaryToObject.cs" />
     <Compile Include="SomeData.cs" />
@@ -64,6 +66,9 @@
       <Project>{ea49f322-4871-4ae2-a6b0-9dbe00c6f4b6}</Project>
       <Name>Library</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
