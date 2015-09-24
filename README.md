@@ -11,7 +11,7 @@
 
 Automagically parses (with reflection) an AppSettings/Dictionary/DataRow/DataTable to a custom class of yours.
 
-## IDictionary<string, object>
+## IDictionary&lt;string, object&gt;
 
 ```cs
 using ToObject;
@@ -20,7 +20,7 @@ var userData = new Dictionary<string, object> { { "Name", "John Smith" }, { "Bir
 var userObject = userData.ToObject<User>();
 ```
 
-## IDictionary<string, string>
+## IDictionary&lt;string, string&gt;
 
 ```cs
 using ToObject;
