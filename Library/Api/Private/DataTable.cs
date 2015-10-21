@@ -25,9 +25,10 @@
 
             var names = table.Columns.OfType<DataColumn>().Select(c => c.ColumnName);
             var tree = new NameTree(names);
+            var children = names.Count() == 1 ? (IEnumerable<NameNode>)new[] { tree.Root } : tree.Root.Children;
 
             foreach (DataRow row in table.Rows)
-                yield return (T)ToObject(typeof(T), ToDictionary(row), tree.Root.Children, safe, false);
+                yield return (T)ToObject(typeof(T), ToDictionary(row), children, safe, false);
         }
 
         private static IDictionary<string, object> ToDictionary(DataRow row)

@@ -16,8 +16,9 @@
                 throw new ArgumentNullException("dict");
 
             var tree = new NameTree(dict.Keys);
+            var children = dict.Keys.Count == 1 ? (IEnumerable<NameNode>)new[] { tree.Root } : tree.Root.Children;
 
-            return (T)ToObject(typeof(T), dict, tree.Root.Children, safe, parse);
+            return (T)ToObject(typeof(T), dict, children, safe, parse);
         }
 
         private static object ToObject(
@@ -98,7 +99,7 @@
             return !t.IsValueType || Nullable.GetUnderlyingType(t) != null;
         }
 
-        // Attempts to parse the given string to the give type
+        // Attempts to parse the given string to the given type
         private static object Parse(string value, Type t)
         {
             if (t == typeof(string)) return value;

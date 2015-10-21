@@ -11,6 +11,26 @@
     public class AppSettingsToObject
     {
         [TestMethod]
+        public void Single()
+        {
+            // Arrange
+            var expected =
+                new SingleData
+                {
+                    Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e")
+                };
+            var appSettings = new NameValueCollection(ConfigurationManager.AppSettings);
+            appSettings.Remove("Date");
+            appSettings.Remove("Text");
+
+            // Act
+            var actual = appSettings.ToObject<SingleData>();
+
+            // Assert
+            Assert.AreEqual(expected.Id, actual.Id);
+        }
+
+        [TestMethod]
         public void LengthyTest()
         {
             // Arrange

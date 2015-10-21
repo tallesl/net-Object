@@ -10,6 +10,28 @@
     public class ObjectDictionaryToObject
     {
         [TestMethod]
+        public void Single()
+        {
+            // Arrange
+            var expected =
+                new SingleData
+                {
+                    Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e")
+                };
+            var dict =
+                new Dictionary<string, object>()
+                {
+                    { "Id", new Guid("366f4bd3-6717-4b14-9c79-70515296df7e") },
+                };
+
+            // Act
+            var actual = dict.ToObject<SingleData>();
+
+            // Assert
+            Assert.AreEqual(expected.Id, actual.Id);
+        }
+
+        [TestMethod]
         public void LengthyTest()
         {
             var expected =
