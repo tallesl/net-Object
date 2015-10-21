@@ -8,6 +8,8 @@
 
         public DateTime? Date { get; set; }
 
+        public Enumeration? Enum { get; set; }
+
         public string Text { get; set; }
     }
 }

@@ -55,6 +55,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AppSettingsToObject.cs" />
+    <Compile Include="Data\Enumeration.cs" />
     <Compile Include="Data\SingleData.cs" />
     <Compile Include="Data\FlatData.cs" />
     <Compile Include="Data\RecursiveData.cs" />

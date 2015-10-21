@@ -21,6 +21,7 @@
                 };
             var appSettings = new NameValueCollection(ConfigurationManager.AppSettings);
             appSettings.Remove("Date");
+            appSettings.Remove("Enum");
             appSettings.Remove("Text");
 
             // Act
@@ -39,6 +40,7 @@
                 {
                     Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
                     Date = new DateTime(1999, 1, 1),
+                    Enum = Enumeration.Two,
                     Text = "level 1",
                 };
 
@@ -48,6 +50,7 @@
             // Assert
             Assert.AreEqual(expected.Id, actual.Id);
             Assert.AreEqual(expected.Date, actual.Date);
+            Assert.AreEqual(expected.Enum, actual.Enum);
             Assert.AreEqual(expected.Text, actual.Text);
         }
 
@@ -76,6 +79,7 @@
                 {
                     Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
                     Date = new DateTime(1999, 1, 1),
+                    Enum = Enumeration.Two,
                     Text = "level 1",
                 };
 
@@ -85,6 +89,7 @@
             // Assert
             Assert.AreEqual(expected.Id, actual.Id);
             Assert.AreEqual(expected.Date, actual.Date);
+            Assert.AreEqual(expected.Enum, actual.Enum);
             Assert.AreEqual(expected.Text, actual.Text);
         }
 
@@ -113,6 +118,7 @@
                 {
                     Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
                     Date = new DateTime(1999, 1, 1),
+                    Enum = Enumeration.Two,
                 };
 
             // Act
@@ -121,6 +127,7 @@
             // Assert
             Assert.AreEqual(expected.Id, actual.Id);
             Assert.AreEqual(expected.Date, actual.Date);
+            Assert.AreEqual(expected.Enum, actual.Enum);
             Assert.AreEqual(expected.Text, actual.Text);
         }
     }

@@ -5,7 +5,6 @@
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
-    using System.Reflection;
     using ToObject.Exceptions;
 
     public static partial class ToObjectExtensions
@@ -25,7 +24,8 @@
             Type t, IDictionary<string, object> dict, IEnumerable<NameNode> children, bool safe, bool parse)
         {
             // If there's no child with value we don't instantiate
-            if (!AnyChildWithValue(dict, children)) return null;
+            if (!AnyChildWithValue(dict, children))
+                return null;
 
             // Getting an instance of the object being created
             var beingCreated = Convert.ChangeType(Activator.CreateInstance(t, false), t);
@@ -62,8 +62,18 @@
                         // Else we call this very method again on it (recursion)
                         ToObject(property.PropertyType, dict, child.Children, safe, parse);
 
+                    // If it's nullable we get its underlying type
+                    var underlying =
+                        Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
+
+                    // If the type is an enum and the value is an enum convertible type and isn't null
+                    if (value != null && underlying.IsEnum && _enumTypes.Contains(value.GetType()))
+
+                        // We set the value to the corresponding one in the enum
+                        value = Enum.ToObject(underlying, value);
+
                     // If types on the dictionary and the class doesn't match
-                    if (value != null && value.GetType() != GetUnderlyingType(property))
+                    if (value != null && value.GetType() != underlying)
 
                         // We throw (despite being safe or not)
                         throw new MismatchedTypesException(property, value.GetType());
@@ -93,6 +103,21 @@
             return beingCreated;
         }
 
+        // Possible enum underlying types
+        // https://msdn.microsoft.com/library/sbbt4032.aspx
+        private static Type[] _enumTypes =
+            new[]
+            {
+                typeof(byte),
+                typeof(sbyte),
+                typeof(short),
+                typeof(ushort),
+                typeof(int),
+                typeof(uint),
+                typeof(long),
+                typeof(ulong),
+            };
+
         // Returns if the given type accepts null
         private static bool AcceptsNull(Type t)
         {
@@ -102,8 +127,10 @@
         // Attempts to parse the given string to the given type
         private static object Parse(string value, Type t)
         {
-            if (t == typeof(string)) return value;
-            else if (value == null && !AcceptsNull(t)) throw new CouldntParseException(value, t);
+            if (t == typeof(string))
+                return value;
+            else if (value == null && !AcceptsNull(t))
+                throw new CouldntParseException(value, t);
             else
             {
                 var converter = TypeDescriptor.GetConverter(t);
@@ -116,12 +143,6 @@
                     throw new CouldntParseException(value, t);
                 }
             }
-        }
-
-        // Returns the property type, if it's nullable we get its underlying type
-        private static Type GetUnderlyingType(PropertyInfo property)
-        {
-            return Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
         }
 
         // Navigates the children finding out if there's any that's not null
