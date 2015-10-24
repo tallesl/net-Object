@@ -3,11 +3,11 @@
 [![][build-img]][build]
 [![][nuget-img]][nuget]
 
-[build]:     https://ci.appveyor.com/project/TallesL/DataTableToObject
-[build-img]: https://ci.appveyor.com/api/projects/status/github/tallesl/DataTableToObject
+[build]:     https://ci.appveyor.com/project/TallesL/ToObject
+[build-img]: https://ci.appveyor.com/api/projects/status/github/tallesl/ToObject
 
-[nuget]:     http://badge.fury.io/nu/DataTableToObject
-[nuget-img]: https://badge.fury.io/nu/DataTableToObject.png
+[nuget]:     http://badge.fury.io/nu/ToObject
+[nuget-img]: https://badge.fury.io/nu/ToObject.png
 
 Automagically parses (with reflection) an AppSettings/Dictionary/DataRow/DataTable to a custom class of yours.
 
