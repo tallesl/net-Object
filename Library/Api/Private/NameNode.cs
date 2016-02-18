@@ -17,6 +17,8 @@
 
         [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields",
             Justification = "It's immutable.")]
+        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
+            Justification = "It's immutable.")]
         public readonly ReadOnlyCollection<NameNode> Children;
 
         internal NameNode(string name, string fullname, IEnumerable<NameNode> child)
