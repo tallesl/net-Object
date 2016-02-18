@@ -5,13 +5,12 @@
 
     public class NameTree
     {
-        private readonly char _separator;
+        private readonly char _separator = '.';
 
         public readonly NameNode Root;
 
-        public NameTree(IEnumerable<string> nameTree, char separator = '.')
+        public NameTree(IEnumerable<string> nameTree)
         {
-            _separator = separator;
             nameTree = nameTree.SelectMany(n => GetNamesInBetween(n)).Distinct();
 
             // Separating the names by their levels descending
