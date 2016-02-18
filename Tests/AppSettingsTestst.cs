@@ -1,14 +1,13 @@
-﻿namespace ToObject.Tests
+﻿namespace ObjectLibrary.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using ObjectLibrary.Tests.Data;
     using System;
     using System.Collections.Specialized;
     using System.Configuration;
-    using ToObject.Exceptions;
-    using ToObject.Tests.Data;
 
     [TestClass]
-    public class AppSettingsToObject
+    public class AppSettingsTestst
     {
         [TestMethod]
         public void Single()

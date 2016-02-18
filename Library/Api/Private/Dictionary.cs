@@ -1,13 +1,12 @@
-﻿namespace ToObject
+﻿namespace ObjectLibrary
 {
     using NameTrees;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
-    using ToObject.Exceptions;
 
-    public static partial class ToObjectExtensions
+    public static partial class ObjectExtensions
     {
         private static T ToObject<T>(IDictionary<string, object> dict, bool safe, bool parse)
         {

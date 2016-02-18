@@ -1,4 +1,4 @@
-﻿namespace ToObject.Tests.Data
+﻿namespace ObjectLibrary.Tests.Data
 {
     public enum Enumeration
     {

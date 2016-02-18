@@ -1,4 +1,4 @@
-﻿namespace ToObject.Exceptions
+﻿namespace ObjectLibrary
 {
     using System;
     using System.Reflection;
@@ -6,7 +6,7 @@
     /// <summary>
     /// The corresponding type in the specified class is different than the one found.
     /// </summary>
-    public class MismatchedTypesException : ToObjectException
+    public class MismatchedTypesException : ObjectException
     {
         internal MismatchedTypesException(PropertyInfo classProperty, Type foundProperty) : base(
             string.Format(

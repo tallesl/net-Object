@@ -1,11 +1,10 @@
-﻿namespace ToObject
+﻿namespace ObjectLibrary
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ToObject.Exceptions;
 
-    public static partial class ToObjectExtensions
+    public static partial class ObjectExtensions
     {
         /// <summary>
         /// Parses the dictionary to the given type.

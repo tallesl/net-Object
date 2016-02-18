@@ -7,8 +7,8 @@
     <ProjectGuid>{EA49F322-4871-4AE2-A6B0-9DBE00C6F4B6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ToObject</RootNamespace>
-    <AssemblyName>ToObject</AssemblyName>
+    <RootNamespace>ObjectLibrary</RootNamespace>
+    <AssemblyName>Object</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -29,7 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\ToObject.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\Object.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NameTree, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">

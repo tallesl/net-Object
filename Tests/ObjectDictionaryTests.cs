@@ -1,13 +1,12 @@
-﻿namespace ToObject.Tests
+﻿namespace ObjectLibrary.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using ObjectLibrary.Tests.Data;
     using System;
     using System.Collections.Generic;
-    using ToObject.Exceptions;
-    using ToObject.Tests.Data;
 
     [TestClass]
-    public class ObjectDictionaryToObject
+    public class ObjectDictionaryTests
     {
         [TestMethod]
         public void Single()

@@ -6,8 +6,8 @@
     <ProjectGuid>{053E9752-4E20-4474-8A54-BDEE30C7CC3E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ToObject.Tests</RootNamespace>
-    <AssemblyName>ToObject.Tests</AssemblyName>
+    <RootNamespace>ObjectLibrary.Tests</RootNamespace>
+    <AssemblyName>Object.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -54,14 +54,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AppSettingsToObject.cs" />
+    <Compile Include="AppSettingsTestst.cs" />
     <Compile Include="Data\Enumeration.cs" />
     <Compile Include="Data\SingleData.cs" />
     <Compile Include="Data\FlatData.cs" />
     <Compile Include="Data\RecursiveData.cs" />
-    <Compile Include="StringDictionaryToObject.cs" />
-    <Compile Include="ObjectDictionaryToObject.cs" />
-    <Compile Include="DataTableToObject.cs" />
+    <Compile Include="StringDictionaryTests.cs" />
+    <Compile Include="ObjectDictionaryTests.cs" />
+    <Compile Include="DataTableTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

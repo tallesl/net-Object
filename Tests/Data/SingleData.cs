@@ -1,4 +1,4 @@
-﻿namespace ToObject.Tests.Data
+﻿namespace ObjectLibrary.Tests.Data
 {
     using System;
 

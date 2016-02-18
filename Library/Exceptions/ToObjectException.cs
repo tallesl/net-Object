@@ -1,12 +1,12 @@
-﻿namespace ToObject.Exceptions
+﻿namespace ObjectLibrary
 {
     using System;
 
     /// <summary>
     /// Base exception.
     /// </summary>
-    public abstract class ToObjectException : Exception
+    public abstract class ObjectException : Exception
     {
-        internal ToObjectException(string message) : base(message) { }
+        internal ObjectException(string message) : base(message) { }
     }
 }

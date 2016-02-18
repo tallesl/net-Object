@@ -1,14 +1,13 @@
-﻿namespace ToObject
+﻿namespace ObjectLibrary
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using ToObject.Exceptions;
 
     /// <summary>
     /// Extension methods for parsing a Dictionary/DataRow/DataTable to a custom class.
     /// </summary>
-    public static partial class ToObjectExtensions
+    public static partial class ObjectExtensions
     {
         /// <summary>
         /// Parses the DataRow to the given type.

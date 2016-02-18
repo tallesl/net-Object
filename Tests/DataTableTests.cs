@@ -1,14 +1,13 @@
-﻿namespace ToObject.Tests
+﻿namespace ObjectLibrary.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using ObjectLibrary.Tests.Data;
     using System;
     using System.Data;
     using System.Linq;
-    using ToObject.Exceptions;
-    using ToObject.Tests.Data;
 
     [TestClass]
-    public class DataTableToObject
+    public class DataTableTests
     {
         [TestMethod]
         public void Single()

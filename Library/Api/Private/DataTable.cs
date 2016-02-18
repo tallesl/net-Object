@@ -1,4 +1,4 @@
-﻿namespace ToObject
+﻿namespace ObjectLibrary
 {
     using NameTrees;
     using System;
@@ -6,7 +6,7 @@
     using System.Data;
     using System.Linq;
 
-    public static partial class ToObjectExtensions
+    public static partial class ObjectExtensions
     {
         private static T ToObject<T>(DataRow row, bool safe)
         {
