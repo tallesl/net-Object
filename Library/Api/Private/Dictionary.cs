@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Globalization;
     using System.Linq;
 
     public static partial class ObjectExtensions
@@ -26,7 +27,7 @@
                 return null;
 
             // Getting an instance of the object being created
-            var beingCreated = Convert.ChangeType(Activator.CreateInstance(t, false), t);
+            var beingCreated = Convert.ChangeType(Activator.CreateInstance(t, false), t, CultureInfo.InvariantCulture);
 
             // Names of the properties in the class that has been assigned
             var assigned = new HashSet<string>();

@@ -1,6 +1,7 @@
 ﻿namespace ObjectLibrary
 {
     using System;
+    using System.Globalization;
     using System.Reflection;
 
     /// <summary>
@@ -8,7 +9,13 @@
     /// </summary>
     public class CouldntParseException : ObjectException
     {
-        internal CouldntParseException(string value, Type type)
-            : base(string.Format("Couldn't parse \"{0}\" to type \"{1}\".", value, type.Name)) { }
+        internal CouldntParseException(string value, Type type) : base(
+            string.Format(
+                CultureInfo.InvariantCulture,
+                "Couldn't parse \"{0}\" to type \"{1}\".",
+                value,
+                type.Name
+            )
+        ) { }
     }
 }
