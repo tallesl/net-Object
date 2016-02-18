@@ -7,6 +7,7 @@
     /// <summary>
     /// The corresponding type in the specified class is different than the one found.
     /// </summary>
+    [Serializable]
     public class MismatchedTypesException : ObjectException
     {
         internal MismatchedTypesException(PropertyInfo classProperty, Type foundProperty) : base(

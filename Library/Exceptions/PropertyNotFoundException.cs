@@ -6,6 +6,7 @@
     /// <summary>
     /// Couldn't find a property in class.
     /// </summary>
+    [Serializable]
     public class PropertyNotFoundException : ObjectException
     {
         internal PropertyNotFoundException(Type classType, string propertyName) : base(

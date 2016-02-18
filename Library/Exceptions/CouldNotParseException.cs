@@ -7,6 +7,7 @@
     /// <summary>
     /// Couldn't parse the found string to the found type.
     /// </summary>
+    [Serializable]
     public class CouldNotParseException : ObjectException
     {
         internal CouldNotParseException(string value, Type type) : base(
