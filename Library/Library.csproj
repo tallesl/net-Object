@@ -45,7 +45,7 @@
     <Compile Include="Api\Private\NameTree.cs" />
     <Compile Include="Api\Public\NameValueCollection.cs" />
     <Compile Include="Api\Public\Dictionary.cs" />
-    <Compile Include="Exceptions\CouldntParseException.cs" />
+    <Compile Include="Exceptions\CouldNotParseException.cs" />
     <Compile Include="Exceptions\ValueNotFoundException.cs" />
     <Compile Include="Exceptions\ToObjectException.cs" />
     <Compile Include="Exceptions\MismatchedTypesException.cs" />

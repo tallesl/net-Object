@@ -127,7 +127,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(CouldntParseException))]
+        [ExpectedException(typeof(CouldNotParseException))]
         public void DifferentTypes()
         {
             // Arrange

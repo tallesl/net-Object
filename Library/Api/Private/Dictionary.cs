@@ -129,7 +129,7 @@
             if (t == typeof(string))
                 return value;
             else if (value == null && !AcceptsNull(t))
-                throw new CouldntParseException(value, t);
+                throw new CouldNotParseException(value, t);
             else
             {
                 var converter = TypeDescriptor.GetConverter(t);
@@ -139,7 +139,7 @@
                 }
                 catch
                 {
-                    throw new CouldntParseException(value, t);
+                    throw new CouldNotParseException(value, t);
                 }
             }
         }

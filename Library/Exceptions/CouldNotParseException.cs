@@ -7,9 +7,9 @@
     /// <summary>
     /// Couldn't parse the found string to the found type.
     /// </summary>
-    public class CouldntParseException : ObjectException
+    public class CouldNotParseException : ObjectException
     {
-        internal CouldntParseException(string value, Type type) : base(
+        internal CouldNotParseException(string value, Type type) : base(
             string.Format(
                 CultureInfo.InvariantCulture,
                 "Couldn't parse \"{0}\" to type \"{1}\".",

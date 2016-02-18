@@ -45,7 +45,7 @@
         /// <param name="dictionary">The dictionary to parse</param>
         /// <returns>The parsed object</returns>
         /// <exception cref="ArgumentNullException">If the given dictionary is null</exception>
-        /// <exception cref="CouldntParseException">If the found value couldn't be parsed to the found type</exception>
+        /// <exception cref="CouldNotParseException">If the found value couldn't be parsed to the found type</exception>
         /// <exception cref="PropertyNotFoundException">
         /// If a property in the dictionary is not found on the type
         /// </exception>
@@ -63,7 +63,7 @@
         /// <param name="dictionary">The dictionary to parse</param>
         /// <returns>The parsed object</returns>
         /// <exception cref="ArgumentNullException">If the given dictionary is null</exception>
-        /// <exception cref="CouldntParseException">If the found value couldn't be parsed to the found type</exception>
+        /// <exception cref="CouldNotParseException">If the found value couldn't be parsed to the found type</exception>
         /// <exception cref="MismatchedTypesException">If the found types doesn't match</exception>
         public static T ToObjectSafe<T>(this IDictionary<string, string> dictionary) where T : new()
         {
