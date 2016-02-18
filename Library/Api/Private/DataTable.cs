@@ -13,10 +13,12 @@
             if (row == null)
                 throw new ArgumentNullException("row");
 
-            var table = new DataTable();
-            table.Locale = CultureInfo.InvariantCulture;
-            table.ImportRow(row);
-            return ToObject<T>(table, safe).First();
+            using (var table = new DataTable())
+            {
+                table.Locale = CultureInfo.InvariantCulture;
+                table.ImportRow(row);
+                return ToObject<T>(table, safe).First();
+            }
         }
 
         private static IEnumerable<T> ToObject<T>(DataTable table, bool safe)
