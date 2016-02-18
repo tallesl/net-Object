@@ -32,10 +32,6 @@
     <DocumentationFile>bin\Release\Object.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NameTree, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NameTree.1.1.0\lib\NameTree.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -43,6 +39,8 @@
   <ItemGroup>
     <Compile Include="Api\Private\DataTable.cs" />
     <Compile Include="Api\Private\Dictionary.cs" />
+    <Compile Include="Api\Private\NameNode.cs" />
+    <Compile Include="Api\Private\NameTree.cs" />
     <Compile Include="Api\Public\NameValueCollection.cs" />
     <Compile Include="Api\Public\Dictionary.cs" />
     <Compile Include="Exceptions\CouldntParseException.cs" />
@@ -52,9 +50,6 @@
     <Compile Include="Api\Public\DataTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Exceptions\PropertyNotFoundException.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

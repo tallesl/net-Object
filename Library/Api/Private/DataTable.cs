@@ -1,6 +1,5 @@
 ﻿namespace ObjectLibrary
 {
-    using NameTrees;
     using System;
     using System.Collections.Generic;
     using System.Data;

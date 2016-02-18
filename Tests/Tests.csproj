@@ -59,6 +59,7 @@
     <Compile Include="Data\SingleData.cs" />
     <Compile Include="Data\FlatData.cs" />
     <Compile Include="Data\RecursiveData.cs" />
+    <Compile Include="NameTreeTests.cs" />
     <Compile Include="StringDictionaryTests.cs" />
     <Compile Include="ObjectDictionaryTests.cs" />
     <Compile Include="DataTableTests.cs" />
