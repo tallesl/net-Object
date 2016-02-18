@@ -13,7 +13,7 @@
 
         [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields",
             Justification = "It's immutable.")]
-        public readonly string Fullname;
+        public readonly string FullName;
 
         [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields",
             Justification = "It's immutable.")]
@@ -22,7 +22,7 @@
         internal NameNode(string name, string fullname, IEnumerable<NameNode> child)
         {
             Name = name;
-            Fullname = fullname;
+            FullName = fullname;
             Children = new ReadOnlyCollection<NameNode>(child.ToList());
         }
 

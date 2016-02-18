@@ -56,7 +56,7 @@
                         child.EndNode ?
 
                         // We use the value in the dictionary and convert it if needed
-                        (parse ? Parse((string)dict[child.Fullname], property.PropertyType) : dict[child.Fullname]) :
+                        (parse ? Parse((string)dict[child.FullName], property.PropertyType) : dict[child.FullName]) :
 
                         // Else we call this very method again on it (recursion)
                         ToObject(property.PropertyType, dict, child.Children, safe, parse);
@@ -147,7 +147,7 @@
         // Navigates the children finding out if there's any that's not null
         private static bool AnyChildWithValue(IDictionary<string, object> dict, IEnumerable<NameNode> children)
         {
-            return children.Where(c => c.EndNode).Any(c => dict[c.Fullname] != null) ||
+            return children.Where(c => c.EndNode).Any(c => dict[c.FullName] != null) ||
                 children.Where(c => !c.EndNode).Any(c => AnyChildWithValue(dict, c.Children));
         }
     }
