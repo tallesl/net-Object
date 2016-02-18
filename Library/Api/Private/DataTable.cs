@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Globalization;
     using System.Linq;
 
     public static partial class ObjectExtensions
@@ -13,6 +14,7 @@
                 throw new ArgumentNullException("row");
 
             var table = new DataTable();
+            table.Locale = CultureInfo.InvariantCulture;
             table.ImportRow(row);
             return ToObject<T>(table, safe).First();
         }
