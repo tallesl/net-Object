@@ -1,12 +1,15 @@
 ﻿namespace ObjectLibrary
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     public class NameTree
     {
         private readonly char _separator = '.';
 
+        [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields",
+            Justification = "It's immutable.")]
         public readonly NameNode Root;
 
         public NameTree(IEnumerable<string> nameTree)
