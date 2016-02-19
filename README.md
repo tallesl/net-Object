@@ -52,5 +52,5 @@ var userData = new Dictionary<string, string> { { "Name", "John Smith" }, { "Bir
 var userObject = userData.ToObject<User>();
 
 userData["Birth"] = "Not a date!";
-var shitHappens = userData.ToObject<User>(); // throws CouldntParseException
+var shitHappens = userData.ToObject<User>(); // throws CouldNotParseException
 ```
