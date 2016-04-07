@@ -7,21 +7,18 @@
     using System.Configuration;
 
     [TestClass]
-    public class AppSettingsTestst
+    public class AppSettingsTest
     {
         [TestMethod]
         public void Single()
         {
             // Arrange
-            var expected =
-                new SingleData
-                {
-                    Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e")
-                };
+            var expected = new SingleData { Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e") };
             var appSettings = new NameValueCollection(ConfigurationManager.AppSettings);
             appSettings.Remove("Date");
             appSettings.Remove("Enum");
             appSettings.Remove("Text");
+            appSettings.Remove("Array");
 
             // Act
             var actual = appSettings.ToObject<SingleData>();
@@ -41,6 +38,7 @@
                     Date = new DateTime(1999, 1, 1),
                     Enum = Enumeration.Two,
                     Text = "level 1",
+                    Array = new[] { 1, 2, 3, },
                 };
 
             // Act
@@ -51,6 +49,7 @@
             Assert.AreEqual(expected.Date, actual.Date);
             Assert.AreEqual(expected.Enum, actual.Enum);
             Assert.AreEqual(expected.Text, actual.Text);
+            CollectionAssert.AreEqual(expected.Array, actual.Array);
         }
 
         [TestMethod]

@@ -76,7 +76,7 @@
 
                         // We throw (despite being safe or not)
                         throw new MismatchedTypesException(property, value.GetType());
-                    
+
                     // Setting the property value (reflection)
                     property.SetValue(beingCreated, value, null);
 
@@ -132,14 +132,30 @@
                 throw new CouldNotParseException(value, t);
             else
             {
-                var converter = TypeDescriptor.GetConverter(t);
-                try
+                if (t.IsArray)
                 {
-                    return converter.ConvertFromString(value);
+                    if (value == null)
+                        return null;
+
+                    var underlyingType = t.GetElementType();
+                    var tokens = value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    var array = Array.CreateInstance(underlyingType, tokens.Length);
+
+                    for (var i = 0; i < tokens.Length; ++i)
+                        array.SetValue(TypeDescriptor.GetConverter(underlyingType).ConvertFromString(tokens[i].Trim()), i);
+
+                    return array;
                 }
-                catch
+                else
                 {
-                    throw new CouldNotParseException(value, t);
+                    try
+                    {
+                        return TypeDescriptor.GetConverter(t).ConvertFromString(value);
+                    }
+                    catch
+                    {
+                        throw new CouldNotParseException(value, t);
+                    }
                 }
             }
         }

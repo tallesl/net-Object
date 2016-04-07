@@ -11,5 +11,7 @@
         public Enumeration? Enum { get; set; }
 
         public string Text { get; set; }
+
+        public int[] Array { get; set; }
     }
 }

@@ -54,7 +54,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AppSettingsTestst.cs" />
+    <Compile Include="AppSettingsTest.cs" />
     <Compile Include="Data\Enumeration.cs" />
     <Compile Include="Data\SingleData.cs" />
     <Compile Include="Data\FlatData.cs" />
