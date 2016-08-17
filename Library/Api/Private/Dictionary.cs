@@ -138,7 +138,7 @@
                         return null;
 
                     var underlyingType = t.GetElementType();
-                    var tokens = value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    var tokens = value.Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries);
                     var array = Array.CreateInstance(underlyingType, tokens.Length);
 
                     for (var i = 0; i < tokens.Length; ++i)

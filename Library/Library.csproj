@@ -45,6 +45,7 @@
     <Compile Include="Api\Private\Dictionary.cs" />
     <Compile Include="Api\Private\NameNode.cs" />
     <Compile Include="Api\Private\NameTree.cs" />
+    <Compile Include="Api\Public\Separator.cs" />
     <Compile Include="Api\Public\NameValueCollection.cs" />
     <Compile Include="Api\Public\Dictionary.cs" />
     <Compile Include="Exceptions\CouldNotParseException.cs" />

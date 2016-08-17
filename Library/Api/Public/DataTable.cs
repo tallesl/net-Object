@@ -4,9 +4,6 @@
     using System.Collections.Generic;
     using System.Data;
 
-    /// <summary>
-    /// Extension methods for parsing a Dictionary/DataRow/DataTable to a custom class.
-    /// </summary>
     public static partial class ObjectExtensions
     {
         /// <summary>
