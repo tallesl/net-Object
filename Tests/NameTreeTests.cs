@@ -4,13 +4,14 @@
     using System.Linq;
 
     [TestClass]
-    public class nameTreeTests
+    public class NameTreeTests
     {
         [TestMethod]
         public void WithRoot()
         {
             var tree = new NameTree(
-                new[] {
+                new[]
+                {
                     "a.i.m.x", "a.i.n.x", "a.i.n.y",
                     "a.j.m.x", "a.j.m.y", "a.j.m.z",
                 }
@@ -82,7 +83,8 @@
         public void WithoutRoot()
         {
             var tree = new NameTree(
-                new[] {
+                new[]
+                {
                     // level 0
                     // (empty root)
 

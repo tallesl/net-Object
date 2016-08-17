@@ -31,15 +31,14 @@
         public void LengthyTest()
         {
             // Arrange
-            var expected =
-                new FlatData
-                {
-                    Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
-                    Date = new DateTime(1999, 1, 1),
-                    Enum = Enumeration.Two,
-                    Text = "level 1",
-                    Array = new[] { 1, 2, 3, },
-                };
+            var expected = new FlatData
+            {
+                Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
+                Date = new DateTime(1999, 1, 1),
+                Enum = Enumeration.Two,
+                Text = "level 1",
+                Array = new[] { 1, 2, 3, },
+            };
 
             // Act
             var actual = ConfigurationManager.AppSettings.ToObject<FlatData>();
@@ -72,14 +71,13 @@
             var appSettings = new NameValueCollection(ConfigurationManager.AppSettings);
             appSettings.Add("Extra property", "whatever");
 
-            var expected =
-                new FlatData
-                {
-                    Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
-                    Date = new DateTime(1999, 1, 1),
-                    Enum = Enumeration.Two,
-                    Text = "level 1",
-                };
+            var expected = new FlatData
+            {
+                Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
+                Date = new DateTime(1999, 1, 1),
+                Enum = Enumeration.Two,
+                Text = "level 1",
+            };
 
             // Act
             var actual = appSettings.ToObject<FlatData>();
@@ -111,13 +109,12 @@
             var appSettings = new NameValueCollection(ConfigurationManager.AppSettings);
             appSettings.Remove("Text");
 
-            var expected =
-                new FlatData
-                {
-                    Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
-                    Date = new DateTime(1999, 1, 1),
-                    Enum = Enumeration.Two,
-                };
+            var expected = new FlatData
+            {
+                Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
+                Date = new DateTime(1999, 1, 1),
+                Enum = Enumeration.Two,
+            };
 
             // Act
             var actual = appSettings.ToObject<FlatData>();

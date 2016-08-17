@@ -140,15 +140,14 @@
         public void DifferentTypes()
         {
             // Arrange
-            var dict =
-                new Dictionary<string, object>()
-                {
-                    { "Id", 11 }, // Should be a Guid
-                    { "Date", new DateTime(1999, 1, 1) },
-                    { "One", Enumeration.One },
-                    { "Array", new[] { 1, 2, 3, } },
-                    { "Text", "eleven" },
-                };
+            var dict = new Dictionary<string, object>()
+            {
+                { "Id", 11 }, // Should be a Guid
+                { "Date", new DateTime(1999, 1, 1) },
+                { "One", Enumeration.One },
+                { "Array", new[] { 1, 2, 3, } },
+                { "Text", "eleven" },
+            };
 
             // Act
             dict.ToObject<RecursiveData>();
@@ -159,16 +158,15 @@
         public void MissingProperty()
         {
             // Arrange
-            var dict =
-                new Dictionary<string, object>()
-                {
-                    { "Id", new Guid("366f4bd3-6717-4b14-9c79-70515296df7e") },
-                    { "Date", new DateTime(1999, 1, 1) },
-                    { "One", Enumeration.One },
-                    { "Text", "eleven" },
-                    { "Array", new[] { 1, 2, 3, } },
-                    { "Integer", 11 }, // There's no Integer
-                };
+            var dict = new Dictionary<string, object>()
+            {
+                { "Id", new Guid("366f4bd3-6717-4b14-9c79-70515296df7e") },
+                { "Date", new DateTime(1999, 1, 1) },
+                { "One", Enumeration.One },
+                { "Text", "eleven" },
+                { "Array", new[] { 1, 2, 3, } },
+                { "Integer", 11 }, // There's no Integer
+            };
 
             // Act
             dict.ToObject<RecursiveData>();
@@ -178,16 +176,15 @@
         public void MissingPropertySafe()
         {
             // Arrange
-            var dict =
-                new Dictionary<string, object>()
-                {
-                    { "Id", new Guid("366f4bd3-6717-4b14-9c79-70515296df7e") },
-                    { "Date", new DateTime(1999, 1, 1) },
-                    { "One", Enumeration.One },
-                    { "Text", "eleven" },
-                    { "Array", new[] { 1, 2, 3, } },
-                    { "Integer", 11 }, // There's no Integer
-                };
+            var dict = new Dictionary<string, object>()
+            {
+                { "Id", new Guid("366f4bd3-6717-4b14-9c79-70515296df7e") },
+                { "Date", new DateTime(1999, 1, 1) },
+                { "One", Enumeration.One },
+                { "Text", "eleven" },
+                { "Array", new[] { 1, 2, 3, } },
+                { "Integer", 11 }, // There's no Integer
+            };
 
             // Act
             dict.ToObjectSafe<RecursiveData>();

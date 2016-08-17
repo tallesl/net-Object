@@ -10,7 +10,8 @@
         /// <summary>
         /// Separator used when splitting a value into an array.
         /// </summary>
-        [SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible", Justification = "That's on purpose.")]
+        [SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible",
+            Justification = "That's on purpose.")]
         public static string Separator = ",";
     }
 }

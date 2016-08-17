@@ -24,82 +24,77 @@
         [TestMethod]
         public void LengthyTest()
         {
-            var expected =
-                new RecursiveData
+            var expected = new RecursiveData
+            {
+                Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
+                Date = new DateTime(1999, 1, 1),
+                Enum = Enumeration.One,
+                Text = "level 1",
+                Array = new[] { 1, 2, 3, },
+                Nested = new RecursiveData
                 {
-                    Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
-                    Date = new DateTime(1999, 1, 1),
-                    Enum = Enumeration.One,
-                    Text = "level 1",
-                    Array = new[] { 1, 2, 3, },
-                    Nested =
-                        new RecursiveData
+                    Id = new Guid("e591be31-289f-4a99-ba67-288ea24b7d7e"),
+                    Date = new DateTime(1999, 2, 2),
+                    Enum = Enumeration.Two,
+                    Text = "level 2",
+                    Array = new[] { 4, 5, 6, },
+                    Nested = new RecursiveData
+                    {
+                        Id = null,
+                        Date = null,
+                        Enum = null,
+                        Text = null,
+                        Array = null,
+                        Nested = new RecursiveData
                         {
-                            Id = new Guid("e591be31-289f-4a99-ba67-288ea24b7d7e"),
-                            Date = new DateTime(1999, 2, 2),
-                            Enum = Enumeration.Two,
-                            Text = "level 2",
-                            Array = new[] { 4, 5, 6, },
-                            Nested =
-                                new RecursiveData
-                                {
-                                    Id = null,
-                                    Date = null,
-                                    Enum = null,
-                                    Text = null,
-                                    Array = null,
-                                    Nested =
-                                        new RecursiveData
-                                        {
-                                            Id = new Guid("3bfdd62f-8b31-4aa2-931d-46535f291b0e"),
-                                            Date = new DateTime(1999, 4, 4),
-                                            Enum = Enumeration.Four,
-                                            Text = "level 4",
-                                            Array = new[] { 10, 11, 12, },
-                                            Nested = null,
-                                        },
-                                },
+                            Id = new Guid("3bfdd62f-8b31-4aa2-931d-46535f291b0e"),
+                            Date = new DateTime(1999, 4, 4),
+                            Enum = Enumeration.Four,
+                            Text = "level 4",
+                            Array = new[] { 10, 11, 12, },
+                            Nested = null,
                         },
-                };
+                    },
+                },
+            };
 
-            var dict =
-                new Dictionary<string, string>()
-                {
-                    // 1st level
-                    { "Id", expected.Id.ToString() },
-                    { "Date", expected.Date.ToString() },
-                    { "Enum", expected.Enum.ToString() },
-                    { "Text", expected.Text },
-                    { "Array", string.Join(",", expected.Array) },
+            var dict = new Dictionary<string, string>()
+            {
+                // 1st level
+                { "Id", expected.Id.ToString() },
+                { "Date", expected.Date.ToString() },
+                { "Enum", expected.Enum.ToString() },
+                { "Text", expected.Text },
+                { "Array", string.Join(",", expected.Array) },
 
-                    // 2nd level
-                    { "Nested.Id", expected.Nested.Id.ToString() },
-                    { "Nested.Date", expected.Nested.Date.ToString() },
-                    { "Nested.Enum", expected.Nested.Enum.ToString()},
-                    { "Nested.Text", expected.Nested.Text },
-                    { "Nested.Array", string.Join(",", expected.Nested.Array) },
+                // 2nd level
+                { "Nested.Id", expected.Nested.Id.ToString() },
+                { "Nested.Date", expected.Nested.Date.ToString() },
+                { "Nested.Enum", expected.Nested.Enum.ToString()},
+                { "Nested.Text", expected.Nested.Text },
+                { "Nested.Array", string.Join(",", expected.Nested.Array) },
 
-                    // 3rd level
-                    { "Nested.Nested.Id", expected.Nested.Nested.Id.ToString() },
-                    { "Nested.Nested.Date", expected.Nested.Nested.Date.ToString() },
-                    { "Nested.Nested.Enum", expected.Nested.Nested.Enum.ToString() },
-                    { "Nested.Nested.Text", expected.Nested.Nested.Text },
-                    { "Nested.Nested.Array", null },
+                // 3rd level
+                { "Nested.Nested.Id", expected.Nested.Nested.Id.ToString() },
+                { "Nested.Nested.Date", expected.Nested.Nested.Date.ToString() },
+                { "Nested.Nested.Enum", expected.Nested.Nested.Enum.ToString() },
+                { "Nested.Nested.Text", expected.Nested.Nested.Text },
+                { "Nested.Nested.Array", null },
 
-                    // 4th level
-                    { "Nested.Nested.Nested.Id", expected.Nested.Nested.Nested.Id.ToString() },
-                    { "Nested.Nested.Nested.Date", expected.Nested.Nested.Nested.Date.ToString() },
-                    { "Nested.Nested.Nested.Enum", expected.Nested.Nested.Nested.Enum.ToString() },
-                    { "Nested.Nested.Nested.Text", expected.Nested.Nested.Nested.Text },
-                    { "Nested.Nested.Nested.Array", string.Join(",", expected.Nested.Nested.Nested.Array) },
+                // 4th level
+                { "Nested.Nested.Nested.Id", expected.Nested.Nested.Nested.Id.ToString() },
+                { "Nested.Nested.Nested.Date", expected.Nested.Nested.Nested.Date.ToString() },
+                { "Nested.Nested.Nested.Enum", expected.Nested.Nested.Nested.Enum.ToString() },
+                { "Nested.Nested.Nested.Text", expected.Nested.Nested.Nested.Text },
+                { "Nested.Nested.Nested.Array", string.Join(",", expected.Nested.Nested.Nested.Array) },
 
-                    // 5th level
-                    { "Nested.Nested.Nested.Nested.Id", null },
-                    { "Nested.Nested.Nested.Nested.Date", null },
-                    { "Nested.Nested.Nested.Nested.Enum", null },
-                    { "Nested.Nested.Nested.Nested.Text", null },
-                    { "Nested.Nested.Nested.Nested.Array", null },
-                };
+                // 5th level
+                { "Nested.Nested.Nested.Nested.Id", null },
+                { "Nested.Nested.Nested.Nested.Date", null },
+                { "Nested.Nested.Nested.Nested.Enum", null },
+                { "Nested.Nested.Nested.Nested.Text", null },
+                { "Nested.Nested.Nested.Nested.Array", null },
+            };
             
             var actual = dict.ToObject<RecursiveData>();
 
@@ -140,15 +135,14 @@
         public void DifferentTypes()
         {
             // Arrange
-            var dict =
-                new Dictionary<string, string>()
-                {
-                    { "Id", "11" }, // Should be a Guid
-                    { "Date", "1999-01-01" },
-                    { "Enum", "One" },
-                    { "Array", "1,2,3" },
-                    { "Text", "eleven" },
-                };
+            var dict = new Dictionary<string, string>()
+            {
+                { "Id", "11" }, // Should be a Guid
+                { "Date", "1999-01-01" },
+                { "Enum", "One" },
+                { "Array", "1,2,3" },
+                { "Text", "eleven" },
+            };
 
             // Act
             dict.ToObject<RecursiveData>();
@@ -159,15 +153,14 @@
         public void MissingProperty()
         {
             // Arrange
-            var dict =
-                new Dictionary<string, string>()
-                {
-                    { "Id", "366f4bd3-6717-4b14-9c79-70515296df7e" },
-                    { "Date", "1999-01-01" },
-                    { "Enum", "One" },
-                    { "Text", "eleven" },
-                    { "Integer", "11" }, // There's no Integer
-                };
+            var dict = new Dictionary<string, string>()
+            {
+                { "Id", "366f4bd3-6717-4b14-9c79-70515296df7e" },
+                { "Date", "1999-01-01" },
+                { "Enum", "One" },
+                { "Text", "eleven" },
+                { "Integer", "11" }, // There's no Integer
+            };
 
             // Act
             dict.ToObject<RecursiveData>();
@@ -177,15 +170,14 @@
         public void MissingPropertySafe()
         {
             // Arrange
-            var dict =
-                new Dictionary<string, string>()
-                {
-                    { "Id", "366f4bd3-6717-4b14-9c79-70515296df7e" },
-                    { "Date", "1999-01-01" },
-                    { "Enum", "One" },
-                    { "Text", "eleven" },
-                    { "Integer", "11" }, // There's no Integer
-                };
+            var dict = new Dictionary<string, string>()
+            {
+                { "Id", "366f4bd3-6717-4b14-9c79-70515296df7e" },
+                { "Date", "1999-01-01" },
+                { "Enum", "One" },
+                { "Text", "eleven" },
+                { "Integer", "11" }, // There's no Integer
+            };
 
             // Act
             dict.ToObjectSafe<RecursiveData>();

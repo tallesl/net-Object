@@ -23,17 +23,8 @@
         public void StringDictionary()
         {
             // Arrange
-            var expected =
-                new RecursiveData
-                {
-                    Array = new[] { 1, 2, 3, }
-                };
-
-            var dict =
-                new Dictionary<string, string>()
-                {
-                    { "Array", string.Join(";", expected.Array) }
-                };
+            var expected = new RecursiveData { Array = new[] { 1, 2, 3, } };
+            var dict = new Dictionary<string, string>() { { "Array", string.Join(";", expected.Array) } };
 
             // Act
             var actual = dict.ToObjectSafe<RecursiveData>();

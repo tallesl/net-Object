@@ -4,7 +4,7 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    public class NameTree
+    internal class NameTree
     {
         private readonly char _separator = '.';
 
@@ -12,9 +12,9 @@
             Justification = "It's immutable.")]
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
             Justification = "It's immutable.")]
-        public readonly NameNode Root;
+        internal readonly NameNode Root;
 
-        public NameTree(IEnumerable<string> nameTree)
+        internal NameTree(IEnumerable<string> nameTree)
         {
             nameTree = nameTree.SelectMany(n => GetNamesInBetween(n)).Distinct();
 

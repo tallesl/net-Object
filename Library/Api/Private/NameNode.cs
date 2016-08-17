@@ -5,21 +5,21 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    public class NameNode
+    internal class NameNode
     {
         [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields",
             Justification = "It's immutable.")]
-        public readonly string Name;
+        internal readonly string Name;
 
         [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields",
             Justification = "It's immutable.")]
-        public readonly string FullName;
+        internal readonly string FullName;
 
         [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields",
             Justification = "It's immutable.")]
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
             Justification = "It's immutable.")]
-        public readonly ReadOnlyCollection<NameNode> Children;
+        internal readonly ReadOnlyCollection<NameNode> Children;
 
         internal NameNode(string name, string fullname, IEnumerable<NameNode> child)
         {
@@ -28,7 +28,7 @@
             Children = new ReadOnlyCollection<NameNode>(child.ToList());
         }
 
-        public bool EndNode
+        internal bool EndNode
         {
             get
             {
