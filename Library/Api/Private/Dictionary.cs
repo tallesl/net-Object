@@ -75,9 +75,19 @@
 
                     // If types on the dictionary and the class doesn't match
                     if (value != null && value.GetType() != underlying)
+                    {
+                        // Maybe it's a nested dictionary
+                        var nested = value as IDictionary<string, object>;
 
-                        // We throw (despite being safe or not)
-                        throw new MismatchedTypesException(property, value.GetType());
+                        // If it isn't
+                        if (nested == null)
+
+                            // We throw (despite being safe or not)
+                            throw new MismatchedTypesException(property, value.GetType());
+
+                        // Else we parse it as well
+                        value = ToObject(underlying, nested, safe, parse);
+                    }
 
                     // Setting the property value (reflection)
                     property.SetValue(beingCreated, value, null);

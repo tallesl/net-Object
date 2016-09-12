@@ -132,6 +132,68 @@
         }
 
         [TestMethod]
+        public void NestedDictionary()
+        {
+            var expected = new RecursiveData
+            {
+                Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
+                Date = new DateTime(1999, 1, 1),
+                Enum = Enumeration.One,
+                Text = "level 1",
+                Array = new[] { 1, 2, 3, },
+                Nested = new RecursiveData
+                {
+                    Id = new Guid("e591be31-289f-4a99-ba67-288ea24b7d7e"),
+                    Date = new DateTime(1999, 2, 2),
+                    Enum = Enumeration.Two,
+                    Text = "level 2",
+                    Array = new[] { 4, 5, 6, },
+                    Nested = null,
+                },
+            };
+
+            var dict = new Dictionary<string, object>()
+            {
+                // 1st level
+                { "Id", expected.Id },
+                { "Date", expected.Date },
+                { "Enum", expected.Enum },
+                { "Text", expected.Text },
+                { "Array", expected.Array },
+
+                // 2nd level
+                {
+                    "Nested",
+                    new Dictionary<string, object>
+                    {
+                        { "Id", expected.Nested.Id },
+                        { "Date", expected.Nested.Date },
+                        { "Enum", expected.Nested.Enum },
+                        { "Text", expected.Nested.Text },
+                        { "Array", expected.Nested.Array },
+                        { "Nested", expected.Nested.Nested },
+                    }
+                }
+            };
+
+            var actual = dict.ToObject<RecursiveData>();
+
+            // 1st level
+            Assert.AreEqual(expected.Id, actual.Id);
+            Assert.AreEqual(expected.Date, actual.Date);
+            Assert.AreEqual(expected.Enum, actual.Enum);
+            Assert.AreEqual(expected.Text, actual.Text);
+            CollectionAssert.AreEqual(expected.Array, actual.Array);
+
+            // 2nd level
+            Assert.AreEqual(expected.Nested.Id, actual.Nested.Id);
+            Assert.AreEqual(expected.Nested.Date, actual.Nested.Date);
+            Assert.AreEqual(expected.Nested.Enum, actual.Nested.Enum);
+            Assert.AreEqual(expected.Nested.Text, actual.Nested.Text);
+            CollectionAssert.AreEqual(expected.Nested.Array, actual.Nested.Array);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(MismatchedTypesException))]
         public void DifferentTypes()
         {
