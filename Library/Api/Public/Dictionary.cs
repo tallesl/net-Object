@@ -20,7 +20,10 @@
         /// <exception cref="MismatchedTypesException">If the found types doesn't match</exception>
         public static T ToObject<T>(this IDictionary<string, object> dictionary) where T : new()
         {
-            return ToObject<T>(dictionary, false, false);
+            if (dictionary == null)
+                throw new ArgumentNullException("dictionary");
+
+            return (T)ToObject(typeof(T), dictionary, false, false);
         }
 
         /// <summary>
@@ -34,7 +37,10 @@
         /// <exception cref="MismatchedTypesException">If the found types doesn't match</exception>
         public static T ToObjectSafe<T>(this IDictionary<string, object> dictionary) where T : new()
         {
-            return ToObject<T>(dictionary, true, false);
+            if (dictionary == null)
+                throw new ArgumentNullException("dictionary");
+
+            return (T)ToObject(typeof(T), dictionary, true, false);
         }
 
         /// <summary>
@@ -52,7 +58,10 @@
         /// <exception cref="MismatchedTypesException">If the found types doesn't match</exception>
         public static T ToObject<T>(this IDictionary<string, string> dictionary) where T : new()
         {
-            return ToObject<T>(dictionary.ToDictionary(kvp => kvp.Key, kvp => (object)kvp.Value), false, true);
+            if (dictionary == null)
+                throw new ArgumentNullException("dictionary");
+
+            return (T)ToObject(typeof(T), dictionary, false, true);
         }
 
         /// <summary>
@@ -67,7 +76,10 @@
         /// <exception cref="MismatchedTypesException">If the found types doesn't match</exception>
         public static T ToObjectSafe<T>(this IDictionary<string, string> dictionary) where T : new()
         {
-            return ToObject<T>(dictionary.ToDictionary(kvp => kvp.Key, kvp => (object)kvp.Value), true, true);
+            if (dictionary == null)
+                throw new ArgumentNullException("dictionary");
+
+            return (T)ToObject(typeof(T), dictionary, true, true);
         }
     }
 }

@@ -25,42 +25,38 @@
         [TestMethod]
         public void LengthyTest()
         {
-            var expected =
-                new RecursiveData
+            var expected = new RecursiveData
+            {
+                Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
+                Date = new DateTime(1999, 1, 1),
+                Enum = Enumeration.One,
+                Text = "level 1",
+                Array = new[] { 1, 2, 3, },
+                Nested = new RecursiveData
                 {
-                    Id = new Guid("366f4bd3-6717-4b14-9c79-70515296df7e"),
-                    Date = new DateTime(1999, 1, 1),
-                    Enum = Enumeration.One,
-                    Text = "level 1",
-                    Array = new[] { 1, 2, 3, },
-                    Nested =
-                        new RecursiveData
+                    Id = new Guid("e591be31-289f-4a99-ba67-288ea24b7d7e"),
+                    Date = new DateTime(1999, 2, 2),
+                    Enum = Enumeration.Two,
+                    Text = "level 2",
+                    Array = new[] { 4, 5, 6, },
+                    Nested = new RecursiveData
+                    {
+                        Id = null,
+                        Date = null,
+                        Enum = null,
+                        Text = null,
+                        Nested = new RecursiveData
                         {
-                            Id = new Guid("e591be31-289f-4a99-ba67-288ea24b7d7e"),
-                            Date = new DateTime(1999, 2, 2),
-                            Enum = Enumeration.Two,
-                            Text = "level 2",
-                            Array = new[] { 4, 5, 6, },
-                            Nested =
-                                new RecursiveData
-                                {
-                                    Id = null,
-                                    Date = null,
-                                    Enum = null,
-                                    Text = null,
-                                    Nested =
-                                        new RecursiveData
-                                        {
-                                            Id = new Guid("3bfdd62f-8b31-4aa2-931d-46535f291b0e"),
-                                            Date = new DateTime(1999, 4, 4),
-                                            Enum = Enumeration.Four,
-                                            Text = "level 4",
-                                            Array = new[] { 10, 11, 12, },
-                                            Nested = null,
-                                        },
-                                },
+                            Id = new Guid("3bfdd62f-8b31-4aa2-931d-46535f291b0e"),
+                            Date = new DateTime(1999, 4, 4),
+                            Enum = Enumeration.Four,
+                            Text = "level 4",
+                            Array = new[] { 10, 11, 12, },
+                            Nested = null,
                         },
-                };
+                    },
+                },
+            };
 
             var dict =
                 new Dictionary<string, object>()

@@ -24,7 +24,7 @@
                 throw new ArgumentNullException("namesValues");
 
             var dict = namesValues.Cast<string>().ToDictionary(key => key, key => (object)namesValues[key]);
-            return ToObject<T>(dict, false, true);
+            return (T)ToObject(typeof(T), dict, false, true);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@
                 throw new ArgumentNullException("namesValues");
 
             var dict = namesValues.Cast<string>().ToDictionary(key => key, key => (object)namesValues[key]);
-            return ToObject<T>(dict, true, true);
+            return (T)ToObject(typeof(T), dict, true, true);
         }
     }
 }

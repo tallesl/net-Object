@@ -8,15 +8,17 @@
 
     public static partial class ObjectExtensions
     {
-        private static T ToObject<T>(IDictionary<string, object> dict, bool safe, bool parse)
+        private static object ToObject(Type t, IDictionary<string, string> dict, bool safe, bool parse)
         {
-            if (dict == null)
-                throw new ArgumentNullException("dict");
+            return ToObject(t, dict.ToDictionary(kvp => kvp.Key, kvp => (object)kvp.Value), safe, parse);
+        }
 
+        private static object ToObject(Type t, IDictionary<string, object> dict, bool safe, bool parse)
+        {
             var tree = new NameTree(dict.Keys);
             var children = dict.Keys.Count == 1 ? (IEnumerable<NameNode>)new[] { tree.Root } : tree.Root.Children;
 
-            return (T)ToObject(typeof(T), dict, children, safe, parse);
+            return ToObject(t, dict, children, safe, parse);
         }
 
         private static object ToObject(
