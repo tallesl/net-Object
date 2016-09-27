@@ -202,7 +202,7 @@
             {
                 { "Id", 11 }, // Should be a Guid
                 { "Date", new DateTime(1999, 1, 1) },
-                { "One", Enumeration.One },
+                { "Enum", Enumeration.One },
                 { "Array", new[] { 1, 2, 3, } },
                 { "Text", "eleven" },
             };
@@ -220,7 +220,7 @@
             {
                 { "Id", new Guid("366f4bd3-6717-4b14-9c79-70515296df7e") },
                 { "Date", new DateTime(1999, 1, 1) },
-                { "One", Enumeration.One },
+                { "Enum", Enumeration.One },
                 { "Text", "eleven" },
                 { "Array", new[] { 1, 2, 3, } },
                 { "Integer", 11 }, // There's no Integer
@@ -238,7 +238,7 @@
             {
                 { "Id", new Guid("366f4bd3-6717-4b14-9c79-70515296df7e") },
                 { "Date", new DateTime(1999, 1, 1) },
-                { "One", Enumeration.One },
+                { "Enum", Enumeration.One },
                 { "Text", "eleven" },
                 { "Array", new[] { 1, 2, 3, } },
                 { "Integer", 11 }, // There's no Integer
@@ -246,6 +246,30 @@
 
             // Act
             dict.ToObjectSafe<RecursiveData>();
+        }
+
+        [TestMethod]
+        public void JustObject()
+        {
+            // Arrange
+            var expected = new Dictionary<string, object>()
+            {
+                { "Id", new Guid("366f4bd3-6717-4b14-9c79-70515296df7e") },
+                { "Date", new DateTime(1999, 1, 1) },
+                { "Enum", Enumeration.One },
+                { "Text", "eleven" },
+                { "Array", new[] { 1, 2, 3, } },
+            };
+
+            // Act
+            var actual = expected.ToObjectSafe<JustObject>();
+
+            // Assert
+            Assert.AreEqual(expected["Id"], actual.Id);
+            Assert.AreEqual(expected["Date"], actual.Date);
+            Assert.AreEqual(expected["Enum"], actual.Enum);
+            Assert.AreEqual(expected["Text"], actual.Text);
+            CollectionAssert.AreEqual((int[])expected["Array"], (int[])actual.Array);
         }
 
         [TestMethod]

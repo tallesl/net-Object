@@ -74,7 +74,7 @@
                         value = Enum.ToObject(underlying, value);
 
                     // If types on the dictionary and the class doesn't match
-                    if (value != null && value.GetType() != underlying)
+                    if (underlying != typeof(object) && value != null && value.GetType() != underlying)
                     {
                         // Maybe it's a nested dictionary
                         var nested = value as IDictionary<string, object>;
