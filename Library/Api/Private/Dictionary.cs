@@ -5,6 +5,7 @@
     using System.ComponentModel;
     using System.Globalization;
     using System.Linq;
+    using System.Reflection;
 
     public static partial class ObjectExtensions
     {
@@ -101,7 +102,8 @@
             if (!safe)
             {
                 // Getting the properties that hasn't been assigned
-                var notAssigned = t.GetProperties().Select(p => p.Name).Except(assigned);
+                var notAssigned =
+                    t.GetProperties(BindingFlags.Instance | BindingFlags.Public).Select(p => p.Name).Except(assigned);
 
                 // If there's any
                 if (notAssigned.Any())
