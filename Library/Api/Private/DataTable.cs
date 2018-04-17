@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using System.Globalization;
     using System.Linq;
 
     public static partial class ObjectExtensions
@@ -13,12 +12,7 @@
             if (row == null)
                 throw new ArgumentNullException("row");
 
-            using (var table = new DataTable())
-            {
-                table.Locale = CultureInfo.InvariantCulture;
-                table.ImportRow(row);
-                return ToObject<T>(table, safe).First();
-            }
+            return ToObject<T>(row.Table, safe).First();
         }
 
         private static IEnumerable<T> ToObject<T>(DataTable table, bool safe)
