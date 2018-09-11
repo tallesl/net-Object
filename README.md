@@ -8,18 +8,7 @@
 [nuget]:     https://www.nuget.org/packages/Object
 [nuget-img]: https://badge.fury.io/nu/Object.svg
 
-Automagically parses (with reflection) an AppSettings/DataRow/DataTable/Dictionary to a custom class of yours.
-
-## [NameValueCollection]&nbsp;([&lt;appSettings&gt;])
-
-```cs
-using ObjectLibrary;
-
-var configuration = ConfigurationManager.AppSettings.ToObject<SomeConfigurationClass>();
-```
-
-[NameValueCollection]: https://msdn.microsoft.com/library/System.Collections.Specialized.NameValueCollection
-[&lt;appSettings&gt;]: https://msdn.microsoft.com/library/System.Configuration.ConfigurationManager.AppSettings
+Automagically parses (with reflection) an DataRow/DataTable/Dictionary to a custom class of yours.
 
 ## [DataRow]/[DataTable]
 
