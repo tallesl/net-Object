@@ -1,6 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <AssemblyTitle>Object</AssemblyTitle>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+    <Authors>Talles L &lt;talleslasmar@gmail.com&gt;</Authors>
+    <Description>Automagically parses (with reflection) an Dictionary/DataRow/DataTable to a custom class of yours.</Description>
+    <FileVersion>4.0.0.0</FileVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageTags>datarow;datatable;dictionary;object;parse;reflection</PackageTags>
+    <PackageVersion>4.0.0</PackageVersion>
+    <RepositoryUrl>https://github.com/tallesl/net-Object</RepositoryUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
