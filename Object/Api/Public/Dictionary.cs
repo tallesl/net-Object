@@ -21,7 +21,7 @@
         public static T ToObject<T>(this IDictionary<string, object> dictionary) where T : new()
         {
             if (dictionary == null)
-                throw new ArgumentNullException("dictionary");
+                throw new ArgumentNullException(nameof(dictionary));
 
             return (T)ToObject(typeof(T), dictionary, false, false);
         }
@@ -38,7 +38,7 @@
         public static T ToObjectSafe<T>(this IDictionary<string, object> dictionary) where T : new()
         {
             if (dictionary == null)
-                throw new ArgumentNullException("dictionary");
+                throw new ArgumentNullException(nameof(dictionary));
 
             return (T)ToObject(typeof(T), dictionary, true, false);
         }
@@ -59,7 +59,7 @@
         public static T ToObject<T>(this IDictionary<string, string> dictionary) where T : new()
         {
             if (dictionary == null)
-                throw new ArgumentNullException("dictionary");
+                throw new ArgumentNullException(nameof(dictionary));
 
             return (T)ToObject(typeof(T), dictionary, false, true);
         }
@@ -77,7 +77,7 @@
         public static T ToObjectSafe<T>(this IDictionary<string, string> dictionary) where T : new()
         {
             if (dictionary == null)
-                throw new ArgumentNullException("dictionary");
+                throw new ArgumentNullException(nameof(dictionary));
 
             return (T)ToObject(typeof(T), dictionary, true, true);
         }

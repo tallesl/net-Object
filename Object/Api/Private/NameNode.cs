@@ -19,12 +19,6 @@
             Children = new ReadOnlyCollection<NameNode>(child.ToList());
         }
 
-        internal bool EndNode
-        {
-            get
-            {
-                return !Children.Any();
-            }
-        }
+        internal bool EndNode { get => !Children.Any(); }
     }
 }

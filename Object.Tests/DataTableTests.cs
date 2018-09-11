@@ -2,9 +2,9 @@
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using ObjectLibrary.Tests.Data;
-    using System;
     using System.Data;
     using System.Linq;
+    using System;
 
     [TestClass]
     public class DataTableTests
@@ -172,8 +172,7 @@
             Assert.AreEqual(null, actual.Nested.Nested.Nested.Nested);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(MismatchedTypesException))]
+        [TestMethod, ExpectedException(typeof(MismatchedTypesException))]
         public void DifferentTypes()
         {
             // Arrange
@@ -197,8 +196,7 @@
             table.ToObject<RecursiveData>().Single();
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(PropertyNotFoundException))]
+        [TestMethod, ExpectedException(typeof(PropertyNotFoundException))]
         public void MissingProperty()
         {
             // Arrange
@@ -250,8 +248,7 @@
             table.ToObjectSafe<RecursiveData>().Single();
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void NullDataRow()
         {
             // Arrange
@@ -261,8 +258,7 @@
             row.ToObject<RecursiveData>();
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void NullDataTable()
         {
             // Arrange

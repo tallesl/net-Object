@@ -51,6 +51,7 @@
         {
             var parts = name.Split(_separator);
             var last = string.Empty;
+
             for (var i = 0; i < parts.Length; ++i)
             {
                 var current = last == string.Empty ? parts[i] : last + _separator + parts[i];
@@ -60,10 +61,7 @@
         }
 
         // Returns the level (how many 'dots') of the name
-        private int GetLevel(string name)
-        {
-            return name.Count(c => c == _separator);
-        }
+        private int GetLevel(string name) => name.Count(c => c == _separator);
 
         // Returns "foo.bar" on "foo.bar.qux".
         private string GetPrefix (string name)
@@ -73,10 +71,7 @@
         }
 
         // Returns "bar" on "foo.bar.qux".
-        private string GetSufix (string name)
-        {
-            return name.Substring(name.LastIndexOf(_separator) + 1);
-        }
+        private string GetSufix (string name) => name.Substring(name.LastIndexOf(_separator) + 1);
 
         // Constructs the children of the given prefix, children names and grandchildren
         private IDictionary<string, IEnumerable<NameNode>> GetChildren(

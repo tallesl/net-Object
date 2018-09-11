@@ -21,7 +21,7 @@
         public static T ToObject<T>(this NameValueCollection namesValues) where T : new()
         {
             if (namesValues == null)
-                throw new ArgumentNullException("namesValues");
+                throw new ArgumentNullException(nameof(namesValues));
 
             var dict = namesValues.Cast<string>().ToDictionary(key => key, key => (object)namesValues[key]);
             return (T)ToObject(typeof(T), dict, false, true);
@@ -39,7 +39,7 @@
         public static T ToObjectSafe<T>(this NameValueCollection namesValues) where T : new()
         {
             if (namesValues == null)
-                throw new ArgumentNullException("namesValues");
+                throw new ArgumentNullException(nameof(namesValues));
 
             var dict = namesValues.Cast<string>().ToDictionary(key => key, key => (object)namesValues[key]);
             return (T)ToObject(typeof(T), dict, true, true);

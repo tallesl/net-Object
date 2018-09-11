@@ -8,16 +8,10 @@
     public class SeparatorTests
     {
         [TestInitialize]
-        public void Initialize()
-        {
-            ObjectExtensions.Separator = ";";
-        }
+        public void Initialize() => ObjectExtensions.Separator = ";";
 
         [TestCleanup]
-        public void Cleanup()
-        {
-            ObjectExtensions.Separator = ",";
-        }
+        public void Cleanup() => ObjectExtensions.Separator = ",";
 
         [TestMethod]
         public void StringDictionary()

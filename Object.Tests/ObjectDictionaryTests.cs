@@ -193,8 +193,7 @@
             CollectionAssert.AreEqual(expected.Nested.Array, actual.Nested.Array);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(MismatchedTypesException))]
+        [TestMethod, ExpectedException(typeof(MismatchedTypesException))]
         public void DifferentTypes()
         {
             // Arrange
@@ -211,8 +210,7 @@
             dict.ToObject<RecursiveData>();
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(PropertyNotFoundException))]
+        [TestMethod, ExpectedException(typeof(PropertyNotFoundException))]
         public void MissingProperty()
         {
             // Arrange
@@ -272,8 +270,7 @@
             CollectionAssert.AreEqual((int[])expected["Array"], (int[])actual.Array);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void Null()
         {
             // Arrange

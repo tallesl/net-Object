@@ -2,8 +2,8 @@
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using ObjectLibrary.Tests.Data;
-    using System;
     using System.Collections.Generic;
+    using System;
 
     [TestClass]
     public class StringDictionaryTests
@@ -130,8 +130,7 @@
             Assert.AreEqual(null, actual.Nested.Nested.Nested.Nested);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(CouldNotParseException))]
+        [TestMethod, ExpectedException(typeof(CouldNotParseException))]
         public void DifferentTypes()
         {
             // Arrange
@@ -148,8 +147,7 @@
             dict.ToObject<RecursiveData>();
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(PropertyNotFoundException))]
+        [TestMethod, ExpectedException(typeof(PropertyNotFoundException))]
         public void MissingProperty()
         {
             // Arrange
@@ -183,8 +181,7 @@
             dict.ToObjectSafe<RecursiveData>();
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void Null()
         {
             // Arrange

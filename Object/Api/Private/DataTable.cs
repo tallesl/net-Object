@@ -28,10 +28,8 @@
                 yield return (T)ToObject(typeof(T), ToDictionary(row), children, safe, false);
         }
 
-        private static IDictionary<string, object> ToDictionary(DataRow row)
-        {
-            return row.Table.Columns.OfType<DataColumn>()
-                .ToDictionary(c => c.ColumnName, c => row[c] == DBNull.Value ? null : row[c]);
-        }
+        private static IDictionary<string, object> ToDictionary(DataRow row) =>
+            row.Table.Columns.OfType<DataColumn>().ToDictionary(
+                c => c.ColumnName, c => row[c] == DBNull.Value ? null : row[c]);
     }
 }
