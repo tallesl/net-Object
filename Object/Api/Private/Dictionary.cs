@@ -156,7 +156,7 @@
                     var array = Array.CreateInstance(underlyingType, tokens.Length);
 
                     for (var i = 0; i < tokens.Length; ++i)
-                        array.SetValue(TypeDescriptor.GetConverter(underlyingType).ConvertFromString(tokens[i].Trim()), i);
+                        array.SetValue(TypeDescriptor.GetConverter(underlyingType).ConvertFromString(tokens[i].Trim(), CultureInfo.InvariantCulture), i);
 
                     return array;
                 }
